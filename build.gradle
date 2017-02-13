@@ -1,15 +1,77 @@
-version '1.0'
+buildscript {
+    ext { springBootVersion = '1.4.1.RELEASE' }
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        // for spring boot
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 
-apply plugin: 'groovy'
-apply plugin: 'java'
+        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
+        //for docker build
+        classpath('se.transmode.gradle:gradle-docker:1.2')
+    }
+}
 
-sourceCompatibility = 1.5
+apply plugin: 'application'
+apply plugin: 'spring-boot'
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        mavenBom 'org.springframework.cloud:spring-cloud-config:1.3.0.M1'
+    }
+}
 
 repositories {
-    mavenCentral()
+    maven {
+        url 'https://repo.spring.io/libs-milestone'
+    }
+    maven {
+        url 'https://github.com/reactivesw/commons/raw/master/lib'
+    }
 }
 
 dependencies {
-    compile 'org.codehaus.groovy:groovy-all:2.3.11'
-    testCompile group: 'junit', name: 'junit', version: '4.11'
+    // spring
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    // for swagger ui
+    compile("io.springfox:springfox-swagger2:2.6.1")
+    compile("io.springfox:springfox-swagger-ui:2.6.1")
+
+    //spring data jpa
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+
+    //common tool
+    compile('org.apache.commons:commons-collections4:4.1')
+    compile('org.apache.commons:commons-lang3:3.4')
+    compile("commons-validator:commons-validator:1.4.0")
+
+    //for jsong web token
+    compile("io.jsonwebtoken:jjwt:0.7.0")
+
+    //lombok
+    compile('org.projectlombok:lombok:1.16.12')
+
+    //security, like password encoder.
+    compile('org.springframework.security:spring-security-crypto')
+    compile('com.google.api-client:google-api-client:1.22.0')
+
+    //spring boot test
+    testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
+
+    //groovy for spock
+    testCompile('org.codehaus.groovy:groovy-all:2.4.1')
+
+    //spock core
+    testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
+
+    //spock spring
+    testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
+
+//    compile project(':base')//depend on base project. for local build.
+    compile("io.reactivesw:commons:0.0.1")
 }
+
+mainClassName = 'io.reactivesw.authentication.Application'
