@@ -10,15 +10,15 @@ import java.util.List;
 /**
  * Created by umasuo on 16/11/17.
  */
-@ApiModel(description = "An Asset can be used to represent media assets, such as images, videos " +
+@ApiModel(description = "An AssetView can be used to represent media assets, such as images, videos " +
     "or PDFs.\n Please find more information about use of Assets in the respective tutorial.\n")
 @Data
-public class Asset {
+public class AssetView {
   @ApiModelProperty(required = true)
   private String id;
 
-  @ApiModelProperty(value = "Array of AssetSource - Has at least one entry", required = true)
-  private List<AssetSource> sources;
+  @ApiModelProperty(value = "Array of AssetSourceView - Has at least one entry", required = true)
+  private List<AssetSourceView> sources;
 
   @ApiModelProperty(value = " Localized String", required = true)
   private LocalizedString name;

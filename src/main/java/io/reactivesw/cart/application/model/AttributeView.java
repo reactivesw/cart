@@ -14,9 +14,9 @@ import lombok.NoArgsConstructor;
 @ApiModel
 @NoArgsConstructor
 @AllArgsConstructor
-public class Attribute {
+public class AttributeView {
 
-  @ApiModelProperty(value = "Attribute Name", required = true)
+  @ApiModelProperty(value = "AttributeView Name", required = true)
   private String name;
 
   @ApiModelProperty(value = "A valid JSON value, based on an AttributeDefinitionEntity.", required = true)

@@ -20,12 +20,12 @@ public class ShippingInfoView {
   @ApiModelProperty(required = true)
   private String shippingMethodName;
 
-  @ApiModelProperty(value = "Determined based on the ShippingRate and the sum of LineItemView prices.",
+  @ApiModelProperty(value = "Determined based on the ShippingRateView and the sum of LineItemView prices.",
       required = true)
   private Money price;
 
   @ApiModelProperty(value = "The shipping rate used to determine the price.", required = true)
-  private ShippingRate shippingRate;
+  private ShippingRateView shippingRate;
 
   @ApiModelProperty(value = "Set once the taxRate is set.")
   private TaxedItemPriceView taxedPrice;
@@ -33,7 +33,7 @@ public class ShippingInfoView {
   @ApiModelProperty(value = "Will be set automatically in the Platform TaxMode once the shipping " +
       "address is set is set. For the External tax mode the tax rate has to be set explicitly " +
       "with the ExternalTaxRateDraft.")
-  private TaxRate taxRate;
+  private TaxRateView taxRate;
 
   @ApiModelProperty(value = "Reference to a TaxCategory")
   private Reference taxCategory;

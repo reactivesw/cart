@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @ApiModel
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ProductVariant {
+public class ProductVariantView {
 
   @ApiModelProperty(value = "The sequential ID of the variant within the product.", required = true)
   private Integer id;
@@ -28,19 +28,19 @@ public class ProductVariant {
   @ApiModelProperty(value = "The prices of the variant. " +
       "The prices does not contain two prices for the same price scope (same currency, country, " +
       "customer group and channel).")
-  private List<Price> prices;
+  private List<PriceView> prices;
 
   @ApiModelProperty
-  private List<Attribute> attributes;
+  private List<AttributeView> attributes;
 
   @ApiModelProperty(value = "Only appears when price selection is used. This field cannot be used" +
       " in a query predicate.")
-  private Price price;
+  private PriceView price;
 
   @ApiModelProperty
-  private List<Image> images;
+  private List<ImageView> images;
 
   @ApiModelProperty
-  private List<Asset> assets;
+  private List<AssetView> assets;
 
 }

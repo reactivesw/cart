@@ -11,7 +11,7 @@ import java.util.List;
  */
 @ApiModel
 @Data
-public class TaxRate {
+public class TaxRateView {
 
   @ApiModelProperty(value = "The id is always set if the tax rate is part of a TaxCategory. The " +
       "external tax rates in a Cart do not contain an id.")
@@ -38,6 +38,6 @@ public class TaxRate {
   @ApiModelProperty(value = "For countries (e.g. the US) where the total tax is a combination of " +
       "multiple taxes (e.g. state and local taxes).",
       required = true)
-  private List<SubRate> subRates;
+  private List<SubRateView> subRates;
 
 }

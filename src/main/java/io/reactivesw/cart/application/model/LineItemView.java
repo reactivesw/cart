@@ -31,12 +31,12 @@ public class LineItemView {
   private String slug;
 
   @ApiModelProperty(value = "product variant", required = true)
-  private ProductVariant productVariant;
+  private ProductVariantView productVariant;
 
   @ApiModelProperty(value =
       "The price of a line item is selected from the prices array of the product variant.",
       required = true)
-  private Price price;
+  private PriceView price;
 
   @ApiModelProperty(value = "Set once the taxRate is set.")
   private TaxedItemPriceView taxedPrice;
@@ -56,7 +56,7 @@ public class LineItemView {
       "Will be set automatically in the Platform TaxMode once the shipping address is set is set." +
           "For the External tax mode the tax rate has to be set explicitly with the " +
           "ExternalTaxRateDraft.")
-  private TaxRate taxRate;
+  private TaxRateView taxRate;
 
   @ApiModelProperty(value = "The supply channel identifies the inventory entries that should be " +
       "reserved. The channel has the role InventorySupply.")

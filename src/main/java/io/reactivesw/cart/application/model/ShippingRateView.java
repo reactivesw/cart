@@ -15,7 +15,7 @@ import lombok.Data;
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class ShippingRate {
+public class ShippingRateView {
 
   @ApiModelProperty(required = true)
   private Money price;

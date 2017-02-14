@@ -9,7 +9,7 @@ import lombok.Data;
  */
 @ApiModel(description = "The width and height of the asset source.")
 @Data
-public class AssetDimensions {
+public class AssetDimensionsView {
 
   @ApiModelProperty(value = "The width of the asset source", required = true)
   private float w;

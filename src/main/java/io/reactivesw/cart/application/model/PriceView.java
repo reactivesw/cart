@@ -16,7 +16,7 @@ import java.time.ZonedDateTime;
 @Data
 @ApiModel
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Price {
+public class PriceView {
 
   @ApiModelProperty(value = "The unique ID of this price.",
       required = true,
