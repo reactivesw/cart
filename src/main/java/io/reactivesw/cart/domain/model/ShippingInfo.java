@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "shipping_info")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class ShippingInfoValue {
+public class ShippingInfo {
 
   @Id
   @GeneratedValue(generator = "uuid")

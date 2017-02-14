@@ -17,7 +17,7 @@ import javax.persistence.Table;
 @Table(name = "line_item")
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class LineItemValue {
+public class LineItem {
 
   @Id
   @GeneratedValue(generator = "uuid")

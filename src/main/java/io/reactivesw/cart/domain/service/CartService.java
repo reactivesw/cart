@@ -81,7 +81,7 @@ public class CartService {
     Cart entity = this.cartRepository.findOne(cartId);
 
     if (entity == null) {
-      throw new NotExistException("Cart not exist with id: " + cartId);
+      throw new NotExistException("CartView not exist with id: " + cartId);
     }
 
     return entity;
@@ -155,8 +155,8 @@ public class CartService {
     this.checkVersion(version, cart.getVersion());
 
     if (cart.getCartState() != CartState.Active) {
-      LOG.debug("Only active Cart can be changed, id:{}", id);
-      throw new ImmutableException("Only active Cart can be changed");
+      LOG.debug("Only active CartView can be changed, id:{}", id);
+      throw new ImmutableException("Only active CartView can be changed");
     }
 
     return this.cartRepository.save(cartEntity);
@@ -222,8 +222,8 @@ public class CartService {
     this.checkVersion(version, cart.getVersion());
 
     if (cart.getCartState() != CartState.Active) {
-      LOG.debug("Only active Cart can be changed, id:{}", id);
-      throw new ImmutableException("Only active Cart can be changed");
+      LOG.debug("Only active CartView can be changed, id:{}", id);
+      throw new ImmutableException("Only active CartView can be changed");
     }
 
     this.cartRepository.delete(id);
@@ -237,9 +237,9 @@ public class CartService {
    */
   private void checkVersion(Integer inputVersion, Integer savedVersion) {
     if (!Objects.equals(inputVersion, savedVersion)) {
-      LOG.debug("Cart version is not correct. inputVersion:{}, savedVersion:{}",
+      LOG.debug("CartView version is not correct. inputVersion:{}, savedVersion:{}",
           inputVersion, savedVersion);
-      throw new ConflictException("Cart version is not correct.");
+      throw new ConflictException("CartView version is not correct.");
     }
   }
 }

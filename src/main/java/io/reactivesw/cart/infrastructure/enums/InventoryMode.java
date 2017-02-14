@@ -7,7 +7,7 @@ package io.reactivesw.cart.infrastructure.enums;
 public enum InventoryMode {
 
   /**
-   * Orders are tracked on inventory. That means, ordering a LineItem will decrement the available
+   * Orders are tracked on inventory. That means, ordering a LineItemView will decrement the available
    * quantity on the respective InventoryEntry. Creating an order will succeed even if the line
    * item’s available quantity is zero or negative. But creating an order will fail with an
    * OutOfStock error if no matching inventory entry exists for a line item.

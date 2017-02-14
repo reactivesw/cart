@@ -75,7 +75,7 @@ public class Cart {
    * List of line items.
    */
   @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private Set<LineItemValue> lineItems;
+  private Set<LineItem> lineItems;
 
   /**
    * cart status.
@@ -118,6 +118,6 @@ public class Cart {
    * Set automatically once the ShippingMethod is set.
    */
   @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-  private ShippingInfoValue shippingInfo;
+  private ShippingInfo shippingInfo;
 
 }
