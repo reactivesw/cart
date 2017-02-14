@@ -19,7 +19,7 @@ import java.util.Set;
 public class RemoveLineItemService extends Updater {
 
   /**
-   * remove LineItemService.
+   * remove LineItemApplication.
    *
    * @param entity E
    * @param action UpdateAction

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import io.reactivesw.cart.infrastructure.enums.CartState;
 import io.reactivesw.cart.infrastructure.enums.InventoryMode;
 import io.reactivesw.cart.infrastructure.enums.TaxMode;
+import io.reactivesw.model.Money;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
@@ -44,7 +45,7 @@ public class CartView {
   List<LineItemView> lineItems;
 
   @ApiModelProperty(value = "Total price", required = true)
-  private MoneyView totalPrice;
+  private Money totalPrice;
 
   @ApiModelProperty(value =
       "Not set until the shipping address is set. Will be set automatically in the Platform " +

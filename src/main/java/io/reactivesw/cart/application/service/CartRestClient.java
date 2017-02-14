@@ -1,6 +1,8 @@
 package io.reactivesw.cart.application.service;
 
 import io.reactivesw.cart.application.model.AddressView;
+import io.reactivesw.cart.application.model.ProductView;
+import io.reactivesw.cart.application.model.TaxCategoryView;
 import io.reactivesw.cart.infrastructure.util.ServiceLocator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,13 +54,16 @@ public class CartRestClient {
    * @param productId the address id
    * @return the Product
    */
-//  public Product getProduct(String productId) {
-//    LOG.debug("enter: productId: {}", productId);
-//    String url = serviceLocator.getProduct() + ProductRouter.getProductWithId(productId);
-//    Product product = restTemplate.getForObject(url, Product.class);
-//    LOG.debug("exit: product: {}", product);
-//    return product;
-//  }
+  public ProductView getProduct(String productId) {
+    LOG.debug("enter: productId: {}", productId);
+
+    //TODO set up the product service.
+    String url = serviceLocator.getProduct() + "/products";
+    ProductView product = restTemplate.getForObject(url, ProductView.class);
+
+    LOG.debug("exit: product: {}", product);
+    return product;
+  }
 
   /**
    * Gets product data from product service.
@@ -80,14 +85,15 @@ public class CartRestClient {
    * @param categoryId the tax category id
    * @return the Zone
    */
-//  public TaxCategory getTaxCategory(String categoryId) {
-//    LOG.debug("enter: categoryId: {}", categoryId);
-//    String url = serviceLocator.getTaxCategory() + TaxCategoryRouter.getTaxCategoryWithId
-//        (categoryId);
-//    TaxCategory taxCategory = restTemplate.getForObject(url, TaxCategory.class);
-//    LOG.debug("enter: taxCategory: {}", taxCategory);
-//    return taxCategory;
-//  }
+  public TaxCategoryView getTaxCategory(String categoryId) {
+    LOG.debug("enter: categoryId: {}", categoryId);
+
+    String url = serviceLocator.getTaxCategory() + "/categories";
+    TaxCategoryView taxCategory = restTemplate.getForObject(url, TaxCategoryView.class);
+
+    LOG.debug("enter: taxCategory: {}", taxCategory);
+    return taxCategory;
+  }
 
   /**
    * Gets tax category id.
