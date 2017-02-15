@@ -27,7 +27,7 @@ import javax.persistence.Version;
  * Created by umasuo on 16/11/25.
  */
 @Entity
-@Table(name = "order_cart")
+@Table(name = "cart")
 @Data
 @EqualsAndHashCode(callSuper = false)
 public class Cart {

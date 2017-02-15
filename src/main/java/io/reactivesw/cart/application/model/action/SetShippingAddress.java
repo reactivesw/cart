@@ -1,7 +1,7 @@
 package io.reactivesw.cart.application.model.action;
 
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import lombok.Data;
 
 /**

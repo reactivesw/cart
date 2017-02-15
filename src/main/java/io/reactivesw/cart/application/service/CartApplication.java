@@ -11,8 +11,8 @@ import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.model.ShippingInfo;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.util.ReferenceTypes;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.Updater;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.cart.infrastructure.update.UpdaterService;
 import io.reactivesw.model.Money;
 import io.reactivesw.model.Reference;
 import org.apache.commons.lang3.StringUtils;
@@ -52,7 +52,7 @@ public class CartApplication {
    * cart update service.
    */
   @Autowired
-  private transient Updater cartUpdater;
+  private transient UpdaterService cartUpdater;
 
   /**
    * cart LineItem service.

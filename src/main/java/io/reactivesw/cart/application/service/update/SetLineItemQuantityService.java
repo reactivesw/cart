@@ -4,9 +4,9 @@ import io.reactivesw.cart.application.model.action.SetLineItemQuantity;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.Updater;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.exception.NotExistException;
+import io.reactivesw.model.Updater;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.Set;
  * Created by umasuo on 16/12/16.
  */
 @Service(value = CartUpdateActionUtils.SET_LINE_ITEM_QUANTITY)
-public class SetLineItemQuantityService extends Updater {
+public class SetLineItemQuantityService implements Updater<Cart, UpdateAction> {
 
   /**
    * change line item quantity.

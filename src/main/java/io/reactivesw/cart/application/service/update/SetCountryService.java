@@ -3,8 +3,8 @@ package io.reactivesw.cart.application.service.update;
 import io.reactivesw.cart.application.model.action.SetCountry;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.Updater;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.model.Updater;
 import org.springframework.stereotype.Service;
 
 /**
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
  * Created by umasuo on 16/12/19.
  */
 @Service(value = CartUpdateActionUtils.SET_COUNTRY)
-public class SetCountryService extends Updater {
+public class SetCountryService implements Updater<Cart, UpdateAction> {
 
 
   /**
