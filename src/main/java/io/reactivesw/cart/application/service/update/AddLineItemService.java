@@ -6,15 +6,15 @@ import io.reactivesw.cart.application.model.mapper.LineItemMapper;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.Updater;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.model.Updater;
 import org.springframework.stereotype.Service;
 
 /**
  * Created by umasuo on 16/12/16.
  */
 @Service(value = CartUpdateActionUtils.ADD_LINE_ITEM)
-public class AddLineItemService extends Updater {
+public class AddLineItemService implements Updater<Cart, UpdateAction> {
 
   /**
    * handle add line item action.

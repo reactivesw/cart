@@ -4,9 +4,9 @@ import io.reactivesw.cart.application.model.action.RemoveLineItem;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.Updater;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.exception.NotExistException;
+import io.reactivesw.model.Updater;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,7 @@ import java.util.Set;
  * Created by umasuo on 16/12/16.
  */
 @Service(value = CartUpdateActionUtils.REMOVE_LINE_ITEM)
-public class RemoveLineItemService extends Updater {
+public class RemoveLineItemService implements Updater<Cart, UpdateAction> {
 
   /**
    * remove LineItemApplication.

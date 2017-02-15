@@ -4,9 +4,9 @@ import io.reactivesw.cart.application.model.action.SetShippingMethod;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.ShippingInfo;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-import io.reactivesw.cart.infrastructure.util.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.Updater;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.exception.ImmutableException;
+import io.reactivesw.model.Updater;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -16,7 +16,7 @@ import java.util.Objects;
  * Created by umasuo on 16/12/19.
  */
 @Service(value = CartUpdateActionUtils.SET_SHIPPING_METHOD)
-public class SetShippingMethodService extends Updater {
+public class SetShippingMethodService implements Updater<Cart, UpdateAction> {
 
   /**
    * set the shipping method.

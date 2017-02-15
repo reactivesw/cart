@@ -5,7 +5,7 @@ import io.reactivesw.cart.application.service.CartApplication;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.Router;
-import io.reactivesw.cart.infrastructure.util.UpdateRequest;
+import io.reactivesw.cart.infrastructure.update.UpdateRequest;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.slf4j.Logger;
