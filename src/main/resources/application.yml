@@ -1,0 +1,22 @@
+server:
+  port: 8081
+
+logging:
+  level:
+    com.netflix.discovery: 'OFF'
+    org.springframework.cloud: 'DEBUG'
+
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/reactivesw
+    username: postgres
+    password: root
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    database-platform: io.reactivesw.database.dialect.JSONBPostgreSQLDialect
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+  profiles:
+    active: test
