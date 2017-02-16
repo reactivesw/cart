@@ -1,19 +1,14 @@
 # Cart Service
 
-# 1. Repo status
 [![Build Status](https://travis-ci.org/reactivesw/cart.svg?branch=master)](https://travis-ci.org/reactivesw/cart)
 
-# 2. Introduction
+# 1. Introduction
 
-# 3. Build & Run
-## 3.1 Build
+# 2. Build & Run
+## 2.1 Build
 
-## 3.2 Run
+## 2.2 Run
 
+# 3. Features
 
-
-# 4. Features
-
-## 5.1, The techniques we choose
-
-# 6. Design
+# 4. Design
