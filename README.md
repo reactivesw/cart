@@ -1,8 +1,8 @@
-[![Build Status](https://travis-ci.org/reactivesw/cart.svg?branch=master)](https://travis-ci.org/reactivesw/cart)
 # 1. Name
 Cart service
 
 # 2. Repo status
+[![Build Status](https://travis-ci.org/reactivesw/cart.svg?branch=master)](https://travis-ci.org/reactivesw/cart)
 
 # 3, Introduction
 
