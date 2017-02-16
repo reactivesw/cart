@@ -6,7 +6,6 @@ logging:
     com.netflix.discovery: 'OFF'
     org.springframework.cloud: 'DEBUG'
 
-
 spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/reactivesw
@@ -18,5 +17,3 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
-  profiles:
-    active: test
