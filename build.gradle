@@ -1,29 +1,26 @@
 buildscript {
-    ext { springBootVersion = '1.4.1.RELEASE' }
     repositories {
         jcenter()
     }
     dependencies {
         // for spring boot
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE")
         classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
-        //for docker build
-        classpath('se.transmode.gradle:gradle-docker:1.2')
     }
 }
 
 apply plugin: 'application'
 apply plugin: 'spring-boot'
 apply plugin: "io.spring.dependency-management"
+apply plugin: "java"
 
 dependencyManagement {
     imports {
         mavenBom 'org.springframework.cloud:spring-cloud-config:1.3.0.M1'
     }
 }
-
 repositories {
+    jcenter()
     maven {
         url 'https://repo.spring.io/libs-milestone'
     }
@@ -31,7 +28,6 @@ repositories {
         url 'https://github.com/reactivesw/commons/raw/master/lib'
     }
 }
-
 dependencies {
     // spring
     compile("org.springframework.boot:spring-boot-starter-web")
