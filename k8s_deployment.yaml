@@ -16,8 +16,8 @@ spec:
         ports:
         - containerPort: 80
         env:
-        － name: server_port
-           value: "80"
+        - name: server_port
+          value: "80"
         - name: spring_datasource_url
           value: jdbc:postgresql://pg-data/cart
         - name: spring_cloud_config_uri
