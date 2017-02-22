@@ -12,9 +12,9 @@ buildscript {
 }
 
 apply plugin: 'application'
-apply plugin: 'spring-boot'
-apply plugin: "io.spring.dependency-management"
-apply plugin: "java"
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'java'
 
 dependencyManagement {
     imports {
@@ -33,6 +33,7 @@ repositories {
 dependencies {
     // spring
     compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.cloud:spring-cloud-starter-config")
 
     // for swagger ui
     compile("io.springfox:springfox-swagger2:2.6.1")
