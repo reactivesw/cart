@@ -19,7 +19,7 @@ public class ImageView {
 
   /**
    * Dimensions of the original image.
-   * This can be used by your application e.g. to determine
+   * This can be used by your controller e.g. to determine
    * whether the image is large enough to display a zoom view.
    */
   private AssetDimensionsView dimensions;

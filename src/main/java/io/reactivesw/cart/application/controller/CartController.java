@@ -36,7 +36,7 @@ public class CartController {
   private transient CartService cartService;
 
   /**
-   * cart application.
+   * cart controller.
    */
   @Autowired
   private transient CartApplication cartApplication;

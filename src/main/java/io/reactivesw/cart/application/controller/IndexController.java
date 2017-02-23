@@ -1,11 +1,9 @@
 package io.reactivesw.cart.application.controller;
 
-import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.client.RestTemplate;
 
 /**
  * Created by umasuo on 17/2/21.
@@ -13,9 +11,20 @@ import org.springframework.web.client.RestTemplate;
 @RestController
 @Configuration
 public class IndexController {
-  @ApiOperation("/")
+
+  /**
+   * service name.
+   */
+  @Value("${spring.controller.name}")
+  private String serviceName;
+
+  /**
+   * this api is used for health check.
+   *
+   * @return service name.
+   */
   @GetMapping("/")
   public String index() {
-    return "Cart service, system time: " + System.currentTimeMillis();
+    return serviceName + ", system time: " + System.currentTimeMillis();
   }
 }
