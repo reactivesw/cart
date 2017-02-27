@@ -1,8 +1,6 @@
 spring:
   application:
-    name: cart-service
-  controller:
-    name: cart-service
+    name: cart
   cloud:
     config:
       uri: http://localhost:8888/
