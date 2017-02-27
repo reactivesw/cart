@@ -28,8 +28,8 @@ items:
           - name: jwt_secret
             valueFrom:
               secretKeyRef:
-              name: reactivesw-secret
-              key: jwt.secret
+                name: reactivesw-secret
+                key: jwt.secret
 - kind: Service
   apiVersion: v1
   metadata:
