@@ -5,7 +5,6 @@ import io.reactivesw.authentication.Token;
 import io.reactivesw.cart.infrastructure.exception.CartExceptionHandler;
 import io.reactivesw.exception.AuthFailedException;
 import io.reactivesw.exception.TokenMissingException;
-import io.reactivesw.exception.handler.ExceptionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
