@@ -75,5 +75,7 @@ dependencies {
     compile("io.reactivesw:commons:0.0.1")
 }
 
-apply from: 'test_coverage.gradle'
+//apply from: 'test_coverage.gradle'
+apply from: 'code_analyzer_test_local/code_analyzer.gradle'
+apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
 mainClassName = 'io.reactivesw.cart.Application'
