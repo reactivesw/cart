@@ -1,8 +1,8 @@
 package io.reactivesw.cart.application.model.action;
 
-import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
-import io.swagger.annotations.ApiModel;
+import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
+
 import lombok.Data;
 
 /**
@@ -11,7 +11,6 @@ import lombok.Data;
  * cart.
  * Created by umasuo on 16/12/5.
  */
-@ApiModel
 @Data
 public class RemoveLineItem implements UpdateAction {
 

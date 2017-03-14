@@ -6,8 +6,7 @@ import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.Router;
 import io.reactivesw.cart.infrastructure.update.UpdateRequest;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,9 +46,8 @@ public class CartController {
    * @param id the id
    * @return the cart by id
    */
-  @ApiOperation(value = "Get cart by cart id.")
   @GetMapping(Router.CART_WITH_ID)
-  public CartView getCartById(@ApiParam(required = true) @PathVariable(Router.CART_ID) String id) {
+  public CartView getCartById(@PathVariable(Router.CART_ID) String id) {
     LOG.info("cartId:{}", id);
 
     Cart entity = cartService.getById(id);
@@ -64,10 +62,8 @@ public class CartController {
    * @param customerId the customer id
    * @return the cart by customer id
    */
-  @ApiOperation(value = "get cart by customer id")
   @GetMapping(value = Router.CARTS_ROOT, params = "subjectId")
-  public CartView getActiveCartByCustomerId(@ApiParam(value = "subjectId") @RequestParam String
-                                                customerId) {
+  public CartView getActiveCartByCustomerId(@RequestParam String customerId) {
     LOG.info("subjectId:{}", customerId);
 
     Cart entity = cartService.getActiveCartByCustomerId(customerId);
@@ -82,10 +78,8 @@ public class CartController {
    * @param anonymousId the customer id
    * @return the cart by customer id
    */
-  @ApiOperation(value = "get cart by anonymous id")
   @GetMapping(value = Router.CARTS_ROOT, params = "anonymousId")
-  public CartView getCartByAnonymousId(
-      @ApiParam(value = "anonymousId") @RequestParam String anonymousId) {
+  public CartView getCartByAnonymousId(@RequestParam String anonymousId) {
     LOG.info("anonymousId:{}", anonymousId);
 
     Cart entity = cartService.getCartByAnonymousId(anonymousId);
@@ -101,7 +95,7 @@ public class CartController {
    * @return Cart
    */
   @PutMapping(Router.CART_WITH_ID)
-  public CartView updateCart(@ApiParam(required = true) @PathVariable(Router.CART_ID) String id,
+  public CartView updateCart(@PathVariable(Router.CART_ID) String id,
                              @RequestBody UpdateRequest updateRequest) {
     LOG.info("id:{}, updateRequest: {}", id, updateRequest);
 
@@ -111,5 +105,4 @@ public class CartController {
     LOG.info("result:{}", result);
     return result;
   }
-
 }
