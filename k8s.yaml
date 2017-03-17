@@ -44,4 +44,3 @@ items:
       nodePort: 30002
     selector:
       name: cart
-

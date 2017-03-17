@@ -1,5 +1,6 @@
 package io.reactivesw.cart.infrastructure.util;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 /**
@@ -16,6 +17,18 @@ public class ServiceLocator {
   public String defaultUrl = "http://localhost:8088";
 
   /**
+   * product service uri.
+   */
+  @Value("${product.service.uri}")
+  private String productUri;
+
+  /**
+   * customer service uri.
+   */
+  @Value("${customer.service.uri}")
+  private String customerUri;
+
+  /**
    * get cart service.
    *
    * @return
@@ -30,7 +43,7 @@ public class ServiceLocator {
    * @return String
    */
   public String getProduct() {
-    return defaultUrl;
+    return productUri;
   }
 
   /**
@@ -84,6 +97,6 @@ public class ServiceLocator {
    * @return String
    */
   public String getCustomer() {
-    return defaultUrl;
+    return customerUri;
   }
 }
