@@ -12,12 +12,12 @@ import java.util.List;
 //@Component
 public class CartAuthProvider implements AuthPolicyProvider {
 
-  @Override
+//  @Override
   public void checkScope(List<Scope> list) {
 
   }
 
-  @Override
+//  @Override
   public void checkBlackList(String s) {
     //do nothing
   }
