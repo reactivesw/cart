@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * Created by umasuo on 17/3/2.
  */
-@Component
+//@Component
 public class CartAuthProvider implements AuthPolicyProvider {
 
   @Override
