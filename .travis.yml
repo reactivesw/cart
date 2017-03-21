@@ -32,7 +32,7 @@ before_deploy:
 
 deploy:
   - provider: script
-    script: sh deploy.sh
+    script: sh ./deploy/deploy.sh
     skip_cleanup: true
     on:
 #      all_branches: true
