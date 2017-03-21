@@ -52,11 +52,11 @@ public class CartController {
    */
   @GetMapping(Router.CART_WITH_ID)
   public CartView getCartById(@PathVariable(Router.CART_ID) String id) {
-    LOG.info("cartId:{}", id);
+    LOG.info("Enter, id: {}", id);
 
     Cart entity = cartService.getById(id);
 
-    LOG.info("entity:{}", entity);
+    LOG.info("Exit entity: {}", entity);
     return cartApplication.getFullCart(entity);
   }
 
