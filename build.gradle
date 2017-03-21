@@ -1,93 +1,34 @@
 buildscript {
+    ext {
+        // specify the spring boot gradle plugin version
+        springBootVersion = '1.5.2.RELEASE'
+    }
     repositories {
         jcenter()
+        mavenCentral()
     }
     dependencies {
         // for spring boot
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:1.5.1.RELEASE")
-        classpath "io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE"
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         //for docker build
         classpath('se.transmode.gradle:gradle-docker:1.2')
         // for unit test code coverage  -- need to find a way to put it in its file
         classpath('com.palantir:jacoco-coverage:0.4.0')
+
     }
 }
 
-apply plugin: 'application'
-apply plugin: 'org.springframework.boot'
-apply plugin: 'io.spring.dependency-management'
-apply plugin: 'java'
+apply from: 'build_scripts/build_setups.gradle'
 
-dependencyManagement {
-    imports {
-        mavenBom 'org.springframework.cloud:spring-cloud-config:1.3.0.M1'
-    }
-}
-repositories {
-    jcenter()
-    maven {
-        url 'https://repo.spring.io/libs-milestone'
-    }
-    maven {
-        url 'https://github.com/reactivesw/commons/raw/master/lib'
-    }
-}
-dependencies {
-    // spring
-    compile("org.springframework.boot:spring-boot-starter-web")
-    compile("org.springframework.cloud:spring-cloud-starter-config")
+apply from: 'build_scripts/application_version.gradle'
 
-    //for @CreatedDate and @LastModifiedDate
-    compile('com.fasterxml.jackson.datatype:jackson-datatype-jsr310:2.8.5')
+apply from: 'build_scripts/application_dependencies.gradle'
 
-    //spring data jpa
-    compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    //postgresql driver
-    compile('org.postgresql:postgresql:9.4.1212')
+apply from: 'build_scripts/docker_build.gradle'
 
-    //common tool
-    compile('org.apache.commons:commons-collections4:4.1')
-    compile('org.apache.commons:commons-lang3:3.4')
-    compile("commons-validator:commons-validator:1.4.0")
+//for code quality assurance
+//apply from: 'build_scripts/quality_assurance/checkstyle.gradle'
+//apply from: 'build_scripts/quality_assurance/findbugs.gradle'
+//apply from: 'build_scripts/quality_assurance/pmd.gradle'
+//apply from: 'build_scripts/quality_assurance/test_coverage.gradle'
 
-    //for jsong web token
-    compile("io.jsonwebtoken:jjwt:0.7.0")
-
-    //lombok
-    compile('org.projectlombok:lombok:1.16.12')
-
-    //security, like password encoder.
-    compile('org.springframework.security:spring-security-crypto')
-    compile('com.google.api-client:google-api-client:1.22.0')
-
-    //spring boot test
-    testCompile('org.springframework.boot:spring-boot-starter-test:1.4.0.RELEASE')
-
-    //groovy for spock
-    testCompile('org.codehaus.groovy:groovy-all:2.4.1')
-
-    //spock core
-    testCompile('org.spockframework:spock-core:1.0-groovy-2.4')
-
-    //spock spring
-    testCompile('org.spockframework:spock-spring:1.0-groovy-2.4')
-
-//    compile project(':commons')//depend on base project. for local build.
-    compile("io.reactivesw:commons:0.0.1")
-}
-
-//apply from: 'test_coverage.gradle'
-apply from: 'code_analyzer_test_local/code_analyzer.gradle'
-apply from: 'code_analyzer_test_local/code_test_coverage.gradle'
-
-jar {
-    baseName = 'cart'
-    version = '0.0.1'
-}
-task wrapper(type: Wrapper) {
-    gradleVersion = '3.1'
-}
-
-apply from: 'docker_build.gradle'
-
-mainClassName = 'io.reactivesw.cart.Application'

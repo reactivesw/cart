@@ -35,5 +35,5 @@ deploy:
     script: sh deploy.sh
     skip_cleanup: true
     on:
-      all_branches: true
-#      branch: master
+#      all_branches: true
+      branch: master

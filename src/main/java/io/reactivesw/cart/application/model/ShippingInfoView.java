@@ -2,7 +2,6 @@ package io.reactivesw.cart.application.model;
 
 import io.reactivesw.model.Money;
 import io.reactivesw.model.Reference;
-
 import lombok.Data;
 
 /**
