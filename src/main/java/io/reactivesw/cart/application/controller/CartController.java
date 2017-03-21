@@ -62,13 +62,13 @@ public class CartController {
    * @param customerId the customer id
    * @return the cart by customer id
    */
-  @GetMapping(value = Router.CARTS_ROOT, params = "subjectId")
+  @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
   public CartView getActiveCartByCustomerId(@RequestParam String customerId) {
-    LOG.info("subjectId:{}", customerId);
+    LOG.info("customerId : {}", customerId);
 
     Cart entity = cartService.getActiveCartByCustomerId(customerId);
 
-    LOG.info("entity:{}", entity);
+    LOG.info("entity : {}", entity);
     return cartApplication.getFullCart(entity);
   }
 
