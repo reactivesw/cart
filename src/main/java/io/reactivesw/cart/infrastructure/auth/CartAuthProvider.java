@@ -8,17 +8,19 @@ import java.util.List;
 
 /**
  * Created by umasuo on 17/3/2.
+ *
+ * remove implements AuthPolicyProvider
  */
-@Component
-public class CartAuthProvider implements AuthPolicyProvider {
+//@Component
+public class CartAuthProvider {
 
-  @Override
-  public void checkScope(List<Scope> list) {
-
-  }
-
-  @Override
-  public void checkBlackList(String s) {
-    //do nothing
-  }
+//  @Override
+//  public void checkScope(List<Scope> list) {
+//
+//  }
+//
+//  @Override
+//  public void checkBlackList(String s) {
+//    //do nothing
+//  }
 }

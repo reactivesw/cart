@@ -7,7 +7,7 @@ public final class Router {
   /**
    * root url of cart.
    */
-  public static final String CARTS_ROOT = "/carts";
+  public static final String CARTS_ROOT = "/";
 
   /**
    * cart id.
@@ -22,12 +22,17 @@ public final class Router {
   /**
    * get cart by id.
    */
-  public static final String CART_WITH_ID = CARTS_ROOT + "/" + ID_PATTERN;
+  public static final String CART_WITH_ID = CARTS_ROOT + ID_PATTERN;
 
   /**
    * get one cart's shipping address.
    */
   public static final String CART_SHIPPING_ADDRESS = CART_WITH_ID + "/shipping-address";
+
+  /**
+   * The constant cart_health_check.
+   */
+  public static final String CART_HEALTH_CHECK = CARTS_ROOT + "health";
 
   /**
    * private constructor.
@@ -40,9 +45,9 @@ public final class Router {
    * path builder: get cart with id.
    *
    * @param id cart id
-   * @return path
+   * @return path cart with id
    */
   public static String getCartWithId(String id) {
-    return CARTS_ROOT + "/" + id;
+    return CARTS_ROOT + id;
   }
 }

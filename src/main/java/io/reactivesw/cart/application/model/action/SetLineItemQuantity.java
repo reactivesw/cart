@@ -1,8 +1,8 @@
 package io.reactivesw.cart.application.model.action;
 
-import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
-import io.swagger.annotations.ApiModel;
+import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
+
 import lombok.Data;
 
 import javax.validation.constraints.NotNull;
@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
  * cart.
  * Created by umasuo on 16/12/5.
  */
-@ApiModel
 @Data
 public class SetLineItemQuantity implements UpdateAction {
 

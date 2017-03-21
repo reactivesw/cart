@@ -1,14 +1,13 @@
 package io.reactivesw.cart.application.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import io.swagger.annotations.ApiModel;
+
 import lombok.Data;
 
 /**
  * Created by umasuo on 16/11/17.
  */
 @Data
-@ApiModel
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ImageView {
   /**
