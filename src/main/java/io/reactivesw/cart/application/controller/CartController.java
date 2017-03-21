@@ -31,14 +31,18 @@ public class CartController {
   /**
    * cart service.
    */
-  @Autowired
   private transient CartService cartService;
 
   /**
    * cart controller.
    */
-  @Autowired
   private transient CartApplication cartApplication;
+
+  @Autowired
+  public CartController(CartService cartService, CartApplication cartApplication) {
+    this.cartService = cartService;
+    this.cartApplication = cartApplication;
+  }
 
   /**
    * get cart by id.

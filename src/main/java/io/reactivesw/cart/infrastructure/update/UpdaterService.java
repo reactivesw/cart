@@ -38,20 +38,20 @@ public class UpdaterService implements Updater<Cart, UpdateAction> {
    */
   @Override
   public void handle(Cart entity, UpdateAction action) {
-    Updater updater = getUpdateService(action.getClass());
+    Updater updater = getUpdateService(action);
     updater.handle(entity, action);
   }
 
   /**
    * get mapper.
    *
-   * @param clazz UpdateAction class
+   * @param action UpdateAction
    * @return ZoneUpdateMapper
    */
-  private Updater getUpdateService(Class<?> clazz) {
-    Updater updater = updateMappers.get(clazz);
+  private Updater getUpdateService(UpdateAction action) {
+    Updater updater = updateMappers.get(action.getActionName());
     if (updater == null) {
-      updater = (Updater) context.getBean(clazz);
+      updater = (Updater) context.getBean(action.getActionName());
     }
     return updater;
   }
