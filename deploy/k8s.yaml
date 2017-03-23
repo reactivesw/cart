@@ -22,7 +22,7 @@ items:
           - name: server_port
             value: "80"
           - name: spring_datasource_url
-            value: jdbc:postgresql://pg-data/cart
+            value: jdbc:postgresql://reactivesw-data/cart
           - name: spring_cloud_config_uri
             value: http://reactivesw-config
           - name: jwt_secret
