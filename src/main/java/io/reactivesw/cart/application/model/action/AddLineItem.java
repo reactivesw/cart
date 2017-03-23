@@ -1,15 +1,27 @@
 package io.reactivesw.cart.application.model.action;
 
-import io.reactivesw.cart.application.model.LineItemDraft;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
+import lombok.Data;
 
-import org.springframework.stereotype.Service;
+import java.io.Serializable;
 
-/**
- * Created by umasuo on 16/12/1.
- */
-public class AddLineItem extends LineItemDraft implements UpdateAction {
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
+
+@Data
+public class AddLineItem implements UpdateAction, Serializable {
+
+  @NotNull
+  private String productId;
+
+  @NotNull
+  private Integer variantId;
+
+  @NotNull
+  @Min(1)
+  private Integer quantity;
+
   @Override
   public String getActionName() {
     return CartUpdateActionUtils.ADD_LINE_ITEM;
