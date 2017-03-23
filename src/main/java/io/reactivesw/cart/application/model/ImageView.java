@@ -1,7 +1,6 @@
 package io.reactivesw.cart.application.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-
 import lombok.Data;
 
 @Data
@@ -12,9 +11,4 @@ public class ImageView {
    * This can be used to obtain the image in different sizes.
    */
   private String url;
-
-  /**
-   * Custom label that can be used, for example, as an image description.
-   */
-  private String label;
 }

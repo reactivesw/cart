@@ -63,14 +63,8 @@ public class CartApplication {
    */
   public CartView updateCart(String id, Integer version, List<UpdateAction> actions) {
     LOGGER.debug("enter: id{}, version: {}, actions: {}", id, version, actions);
-    Cart cart = cartService.getById(id);
 
-    //update data from action
-    actions.stream().forEach(
-        action -> cartUpdater.handle(cart, action)
-    );
-
-    Cart result = cartService.updateCart(id, version, cart);
+    Cart result = cartService.updateCart(id, version, actions);
 
     LOGGER.debug("exit: result: {}", result);
     return getFullCart(result);
@@ -143,10 +137,12 @@ public class CartApplication {
             itemView.setId(lineItem.getId());
             itemView.setQuantity(lineItem.getQuantity());
             itemView.setProductId(lineItem.getProductId());
+            itemView.setVariantId(lineItem.getVariantId());
             itemView.setName(product.getName());
             itemView.setImages(product.getImages());
             itemView.setPrice(product.getPrice().getValue());
             itemView.setSku(product.getSku());
+            items.add(itemView);
           }
       );
       LOGGER.debug("exit: cart: {}", cartView);
@@ -164,9 +160,14 @@ public class CartApplication {
     LOGGER.debug("enter: cart: {}", cart);
     List<LineItemView> items = cart.getLineItems();
     int lineItemTotalPrice = 0;
+    Money cartTotal = new Money();
     if (items != null) {
+
       items.stream().forEach(
-          lineItem -> lineItemService.calculateItemPrice(lineItem)
+          lineItem -> {
+            lineItemService.calculateItemPrice(lineItem);
+            cartTotal.setCurrencyCode(lineItem.getPrice().getCurrencyCode());
+          }
       );
       //count total price of all line item
       lineItemTotalPrice = items.stream().mapToInt(
@@ -176,7 +177,7 @@ public class CartApplication {
     }
 
     int cartTotalPrice = lineItemTotalPrice;
-    Money cartTotal = new Money();
+
     // TODO need the currency code?
     cartTotal.setCentAmount(cartTotalPrice);
     cart.setTotalPrice(cartTotal);

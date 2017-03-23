@@ -40,7 +40,7 @@ public class CartRestClient {
   public ProductView getProduct(String productId, Integer variantId) {
     LOG.debug("enter: productId: {}", productId);
 
-    String url = serviceLocator.getProduct() + "/CartProducts/" + productId + "/variantId/" +
+    String url = serviceLocator.getProduct() + "CartProducts/" + productId + "?variantId=" +
         variantId;
     ProductView product = restTemplate.getForObject(url, ProductView.class);
 
