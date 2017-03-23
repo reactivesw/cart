@@ -6,13 +6,14 @@ import io.reactivesw.cart.application.model.LineItemView;
 import io.reactivesw.cart.application.model.ProductVariantView;
 import io.reactivesw.cart.application.model.ProductView;
 import io.reactivesw.cart.application.model.mapper.CartMapper;
+import io.reactivesw.cart.application.model.mapper.LineItemMapper;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.model.ShippingInfo;
 import io.reactivesw.cart.domain.service.CartService;
-import io.reactivesw.cart.infrastructure.util.ReferenceTypes;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.cart.infrastructure.update.UpdaterService;
+import io.reactivesw.cart.infrastructure.util.ReferenceTypes;
 import io.reactivesw.model.Money;
 import io.reactivesw.model.Reference;
 import org.apache.commons.lang3.StringUtils;
@@ -34,7 +35,7 @@ public class CartApplication {
   /**
    * logger.
    */
-  private static final Logger LOG = LoggerFactory.getLogger(CartApplication.class);
+  private static final Logger LOGGER = LoggerFactory.getLogger(CartApplication.class);
 
   /**
    * cart service.
@@ -69,17 +70,17 @@ public class CartApplication {
    * @return CartEntity
    */
   public CartView updateCart(String id, Integer version, List<UpdateAction> actions) {
-    LOG.debug("enter: id{}, version: {}, actions: {}", id, version, actions);
+    LOGGER.debug("enter: id{}, version: {}, actions: {}", id, version, actions);
     Cart cart = cartService.getById(id);
 
     //update data from action
-    actions.parallelStream().forEach(
+    actions.stream().forEach(
         action -> cartUpdater.handle(cart, action)
     );
 
     Cart result = cartService.updateCart(id, version, cart);
 
-    LOG.debug("exit: result: {}", result);
+    LOGGER.debug("exit: result: {}", result);
     return getFullCart(result);
   }
 
@@ -90,13 +91,13 @@ public class CartApplication {
    * @return CartView
    */
   public CartView getFullCart(Cart cart) {
-    LOG.debug("enter: entity: {}", cart);
+    LOGGER.debug("enter: entity: {}", cart);
 
     CartView data = fillData(cart);
 
     calculateCartPrice(data);
 
-    LOG.debug("exit cart: {}", data);
+    LOGGER.debug("exit cart: {}", data);
     return data;
   }
 
@@ -106,7 +107,7 @@ public class CartApplication {
    * @return Cart
    */
   private CartView fillData(Cart cart) {
-    LOG.debug("enter: entity: {}", cart);
+    LOGGER.debug("enter: entity: {}", cart);
     //got the base info
     CartView cartView = CartMapper.entityToModel(cart);
 
@@ -122,7 +123,7 @@ public class CartApplication {
     //fill the shipping info
     fillShippingInfo(cartView, cart.getShippingInfo());
 
-    LOG.debug("end fillData, exit: cart: {}", cartView);
+    LOGGER.debug("end fillData, exit: cart: {}", cartView);
     return cartView;
   }
 
@@ -134,14 +135,14 @@ public class CartApplication {
    * @param addressId address id.
    */
   private void fillShippingAddress(CartView cartView, String addressId) {
-    LOG.debug("enter: cart: {}, addressId: {}", cartView, addressId);
+    LOGGER.debug("enter: cart: {}, addressId: {}", cartView, addressId);
 
     if (StringUtils.isNotBlank(addressId)) {
       //get address from customer service
       AddressView address = restClient.getAddress(addressId);
       cartView.setShippingAddress(address);
 
-      LOG.debug("enter: cart: {}, address: {}", cartView, address);
+      LOGGER.debug("enter: cart: {}, address: {}", cartView, address);
     }
   }
 
@@ -152,14 +153,14 @@ public class CartApplication {
    * @param addressId String address id
    */
   private void fillBillingAddress(CartView cartView, String addressId) {
-    LOG.debug("enter: cart: {}, addressId: {}", cartView, addressId);
+    LOGGER.debug("enter: cart: {}, addressId: {}", cartView, addressId);
 
     if (StringUtils.isNotBlank(addressId)) {
       //get address from customer service
       AddressView address = restClient.getAddress(addressId);
       cartView.setBillingAddress(address);
 
-      LOG.debug("enter: cart: {}, addressId: {}", cartView, addressId);
+      LOGGER.debug("enter: cart: {}, addressId: {}", cartView, addressId);
     }
   }
 
@@ -171,7 +172,7 @@ public class CartApplication {
    * @param lineItems Set<LineItemValue>
    */
   private void fillLineItem(CartView cartView, Set<LineItem> lineItems) {
-    LOG.debug("enter: cart: {}, lineItems: {}", cartView, lineItems);
+    LOGGER.debug("enter: cart: {}, lineItems: {}", cartView, lineItems);
 
     if (lineItems != null) {
       List<LineItemView> items = new ArrayList<>();
@@ -179,10 +180,11 @@ public class CartApplication {
           lineItem -> {
             LineItemView item = new LineItemView();
             setLineItemBaseInfo(item, lineItem);
-            //TODO get Product from product service.
+            ProductView product = restClient.getProduct(item.getProductId());
+            LineItemMapper.fillView(item, product);
           }
       );
-      LOG.debug("exit: cart: {}", cartView);
+      LOGGER.debug("exit: cart: {}", cartView);
       cartView.setLineItems(items);
     }
   }
@@ -194,7 +196,7 @@ public class CartApplication {
    * @param lineItemValue LineItemEntity
    */
   private void setLineItemBaseInfo(LineItemView item, LineItem lineItemValue) {
-    LOG.debug("enter: LineItem: {}, LineItemValue: {}", item, lineItemValue);
+    LOGGER.debug("enter: LineItem: {}, LineItemValue: {}", item, lineItemValue);
 
     item.setId(lineItemValue.getId());
     item.setQuantity(lineItemValue.getQuantity());
@@ -204,7 +206,7 @@ public class CartApplication {
     item.setSupplyChannel(new Reference(ReferenceTypes.CHANNEL.getType(),
         lineItemValue.getSupplyChannel()));
 
-    LOG.debug("exit: LineItem: {}", item);
+    LOGGER.debug("exit: LineItem: {}", item);
   }
 
   /**
@@ -216,14 +218,15 @@ public class CartApplication {
    */
   private void setLineItemProductInfo(LineItemView item, ProductView productData, Integer
       variantId) {
-    LOG.debug("enter: LineItem: {}, productData: {}, variantId: {}", item, productData, variantId);
+    LOGGER.debug("enter: LineItem: {}, productData: {}, variantId: {}", item, productData,
+        variantId);
     item.setName(productData.getName());
     item.setSlug(productData.getSlug());
 
     ProductVariantView variant = productData.getVariant();
     item.setProductVariant(variant);
 
-    LOG.debug("exit: LineItem: {}", item);
+    LOGGER.debug("exit: LineItem: {}", item);
   }
 
   /**
@@ -233,13 +236,13 @@ public class CartApplication {
    * @param infoValue ShippingInfoValue
    */
   private void fillShippingInfo(CartView cart, ShippingInfo infoValue) {
-    LOG.debug("enter: cart: {}, ShippingInfoValue: {}", cart, infoValue);
+    LOGGER.debug("enter: cart: {}, ShippingInfoValue: {}", cart, infoValue);
 
     String shippingMethodId = infoValue == null ? null : infoValue.getShippingMethod();
     if (shippingMethodId != null) {
       //TODO fill the function
     }
-    LOG.debug("exit: cart: {}", cart);
+    LOGGER.debug("exit: cart: {}", cart);
   }
 
 
@@ -249,20 +252,20 @@ public class CartApplication {
    * @param cart Cart
    */
   private void calculateCartPrice(CartView cart) {
-    LOG.debug("enter: cart: {}", cart);
+    LOGGER.debug("enter: cart: {}", cart);
     String currencyCode = cart.getCurrencyCode();
     String country = cart.getCountry();
     List<LineItemView> items = cart.getLineItems();
     int lineItemTotalPrice = 0;
     if (items != null) {
-      items.parallelStream().forEach(
+      items.stream().forEach(
           lineItem -> {
             lineItemService.selectItemPrice(lineItem, currencyCode, country);
             lineItemService.calculateItemPrice(lineItem);
           }
       );
       //count total price of all line item
-      lineItemTotalPrice = items.parallelStream().mapToInt(
+      lineItemTotalPrice = items.stream().mapToInt(
           lineItem -> lineItem.getTotalPrice() == null ? 0 : lineItem.getTotalPrice()
               .getCentAmount()
       ).sum();
@@ -276,6 +279,6 @@ public class CartApplication {
     cartTotal.setCurrencyCode(cart.getCurrencyCode());
     cartTotal.setCentAmount(cartTotalPrice);
     cart.setTotalPrice(cartTotal);
-    LOG.debug("exit: cart: {}", cart);
+    LOGGER.debug("exit: cart: {}", cart);
   }
 }

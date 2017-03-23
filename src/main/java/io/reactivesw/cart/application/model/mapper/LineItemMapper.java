@@ -1,6 +1,8 @@
 package io.reactivesw.cart.application.model.mapper;
 
 import io.reactivesw.cart.application.model.LineItemDraft;
+import io.reactivesw.cart.application.model.LineItemView;
+import io.reactivesw.cart.application.model.ProductView;
 import io.reactivesw.cart.domain.model.LineItem;
 
 /**
@@ -32,8 +34,19 @@ public class LineItemMapper {
           .getDistributionChannel().getId();
       entity.setDistributionChannel(distributionChannel);
     }
-
     return entity;
+  }
+
+  /**
+   * fill view with product view.
+   * @param itemView
+   * @param productView
+   */
+  public static void fillView(LineItemView itemView, ProductView productView) {
+    itemView.setName(productView.getName());
+    itemView.setPrice(productView.getVariant().getPrice());
+    itemView.setProductVariant(productView.getVariant());
+    itemView.setSlug(productView.getSlug());
   }
 
 }

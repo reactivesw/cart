@@ -1,0 +1,4 @@
+jar {
+    baseName = 'cart'
+    version = '0.0.2'
+}

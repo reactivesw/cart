@@ -4,6 +4,8 @@ import io.reactivesw.cart.application.model.LineItemDraft;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 
+import org.springframework.stereotype.Service;
+
 /**
  * Created by umasuo on 16/12/1.
  */

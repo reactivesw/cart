@@ -26,7 +26,7 @@ public class AddLineItemService implements Updater<Cart, UpdateAction> {
   public void handle(Cart entity, UpdateAction action) {
     LineItem data = this.getData((AddLineItem) action);
 
-    LineItem value = entity.getLineItems().parallelStream().filter(
+    LineItem value = entity.getLineItems().stream().filter(
         lineItemValue -> lineItemValue.getProductId().equals(data.getProductId())
             && lineItemValue.getVariant() == data.getVariant()
     ).findAny().orElse(null);

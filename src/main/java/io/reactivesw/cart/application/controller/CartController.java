@@ -31,14 +31,18 @@ public class CartController {
   /**
    * cart service.
    */
-  @Autowired
   private transient CartService cartService;
 
   /**
    * cart controller.
    */
-  @Autowired
   private transient CartApplication cartApplication;
+
+  @Autowired
+  public CartController(CartService cartService, CartApplication cartApplication) {
+    this.cartService = cartService;
+    this.cartApplication = cartApplication;
+  }
 
   /**
    * get cart by id.
@@ -48,11 +52,11 @@ public class CartController {
    */
   @GetMapping(Router.CART_WITH_ID)
   public CartView getCartById(@PathVariable(Router.CART_ID) String id) {
-    LOG.info("cartId:{}", id);
+    LOG.info("Enter, id: {}", id);
 
     Cart entity = cartService.getById(id);
 
-    LOG.info("entity:{}", entity);
+    LOG.info("Exit entity: {}", entity);
     return cartApplication.getFullCart(entity);
   }
 
@@ -62,13 +66,13 @@ public class CartController {
    * @param customerId the customer id
    * @return the cart by customer id
    */
-  @GetMapping(value = Router.CARTS_ROOT, params = "subjectId")
+  @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
   public CartView getActiveCartByCustomerId(@RequestParam String customerId) {
-    LOG.info("subjectId:{}", customerId);
+    LOG.info("customerId : {}", customerId);
 
     Cart entity = cartService.getActiveCartByCustomerId(customerId);
 
-    LOG.info("entity:{}", entity);
+    LOG.info("entity : {}", entity);
     return cartApplication.getFullCart(entity);
   }
 
