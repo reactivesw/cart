@@ -10,9 +10,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
- * Created by umasuo on 17/3/2.
- */
 @Component
 public class CartExceptionHandler  extends ExceptionHandler implements HandlerExceptionResolver {
 

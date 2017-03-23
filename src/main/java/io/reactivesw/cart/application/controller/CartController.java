@@ -6,10 +6,10 @@ import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.Router;
 import io.reactivesw.cart.infrastructure.update.UpdateRequest;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,10 +17,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.constraints.NotNull;
+
 /**
  * Created by umasuo on 16/11/21.
  */
 @RestController
+@CrossOrigin
 public class CartController {
 
   /**
@@ -47,14 +50,14 @@ public class CartController {
   /**
    * get cart by id.
    *
-   * @param id the id
+   * @param cartId the id
    * @return the cart by id
    */
   @GetMapping(Router.CART_WITH_ID)
-  public CartView getCartById(@PathVariable(Router.CART_ID) String id) {
-    LOG.info("Enter, id: {}", id);
+  public CartView getCartById(@PathVariable(Router.CART_ID) String cartId) {
+    LOG.info("Enter, id: {}", cartId);
 
-    Cart entity = cartService.getById(id);
+    Cart entity = cartService.getById(cartId);
 
     LOG.info("Exit entity: {}", entity);
     return cartApplication.getFullCart(entity);
@@ -67,7 +70,7 @@ public class CartController {
    * @return the cart by customer id
    */
   @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
-  public CartView getActiveCartByCustomerId(@RequestParam String customerId) {
+  public CartView getActiveCartByCustomerId(@RequestParam @NotNull String customerId) {
     LOG.info("customerId : {}", customerId);
 
     Cart entity = cartService.getActiveCartByCustomerId(customerId);

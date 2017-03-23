@@ -1,9 +1,7 @@
 package io.reactivesw.cart.application.service;
 
-import io.reactivesw.cart.application.model.AddressView;
 import io.reactivesw.cart.application.model.ProductView;
 import io.reactivesw.cart.infrastructure.util.ServiceLocator;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,21 +30,6 @@ public class CartRestClient {
   @Autowired
   private transient ServiceLocator serviceLocator;
 
-  /**
-   * Gets Address from customer service.
-   *
-   * @param addressId the address id
-   * @return the Address
-   */
-  public AddressView getAddress(String addressId) {
-    LOG.debug("enter: addressId: {}", addressId);
-
-    String url = serviceLocator.getCustomer() + "addresses/" + addressId;
-    AddressView address = restTemplate.getForObject(url, AddressView.class);
-
-    LOG.debug("exit: Address: {}", address);
-    return address;
-  }
 
   /**
    * Gets product data from product service.
@@ -54,10 +37,11 @@ public class CartRestClient {
    * @param productId the address id
    * @return the Product
    */
-  public ProductView getProduct(String productId) {
+  public ProductView getProduct(String productId, Integer variantId) {
     LOG.debug("enter: productId: {}", productId);
 
-    String url = serviceLocator.getProduct() + productId;
+    String url = serviceLocator.getProduct() + "CartProducts/" + productId + "?variantId=" +
+        variantId;
     ProductView product = restTemplate.getForObject(url, ProductView.class);
 
     LOG.debug("exit: product: {}", product);

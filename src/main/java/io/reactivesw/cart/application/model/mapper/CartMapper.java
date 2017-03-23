@@ -3,9 +3,6 @@ package io.reactivesw.cart.application.model.mapper;
 import io.reactivesw.cart.application.model.CartView;
 import io.reactivesw.cart.domain.model.Cart;
 
-/**
- * Created by umasuo on 16/12/5.
- */
 public class CartMapper {
 
   /**
@@ -26,9 +23,6 @@ public class CartMapper {
       cart.setCustomerId(entity.getCustomerId());
       cart.setAnonymousId(entity.getAnonymousId());
       cart.setCartState(entity.getCartState());
-      cart.setTaxMode(entity.getTaxMode());
-      cart.setCountry(entity.getCountry());
-      cart.setCurrencyCode(entity.getCurrencyCode());
     }
     return cart;
   }

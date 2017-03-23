@@ -2,11 +2,9 @@ package io.reactivesw.cart.application.model;
 
 import io.reactivesw.model.LocalizedString;
 import io.reactivesw.model.Money;
-import io.reactivesw.model.Reference;
-
 import lombok.Data;
 
-import javax.persistence.Id;
+import java.util.List;
 
 /**
  * Created by umasuo on 16/11/17.
@@ -14,28 +12,22 @@ import javax.persistence.Id;
 @Data
 public class LineItemView {
 
-  @Id
   private String id;
 
   private String productId;
 
   private LocalizedString name;
 
-  private String slug;
+  private Integer variantId;
 
-  private ProductVariantView productVariant;
+  private String sku;
 
-  private PriceView price;
+  private List<ImageView> images;
 
-  private TaxedItemPriceView taxedPrice;
+  private Money price;
 
   private Money totalPrice;
 
   private Integer quantity;
 
-  private TaxRateView taxRate;
-
-  private Reference supplyChannel;
-
-  private Reference distributionChannel;
 }

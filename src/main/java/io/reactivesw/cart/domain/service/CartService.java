@@ -3,6 +3,8 @@ package io.reactivesw.cart.domain.service;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.infrastructure.enums.CartState;
 import io.reactivesw.cart.infrastructure.repository.CartRepository;
+import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.cart.infrastructure.update.UpdaterService;
 import io.reactivesw.exception.AlreadyExistException;
 import io.reactivesw.exception.ConflictException;
 import io.reactivesw.exception.ImmutableException;
@@ -35,6 +37,12 @@ public class CartService {
    */
   @Autowired
   private transient CartRepository cartRepository;
+
+  /**
+   * cart update service.
+   */
+  @Autowired
+  private transient UpdaterService cartUpdater;
 
   /**
    * Create an new active cart with sample.
@@ -160,6 +168,22 @@ public class CartService {
     }
 
     return this.cartRepository.save(cartEntity);
+  }
+
+  public Cart updateCart(String id, Integer version, List<UpdateAction> actions) {
+    Cart cart = this.getById(id);
+
+    this.checkVersion(version, cart.getVersion());
+    if (cart.getCartState() != CartState.Active) {
+      LOG.debug("Only active CartView can be changed, id:{}", id);
+      throw new ImmutableException("Only active CartView can be changed");
+    }
+
+    //update data from action
+    actions.stream().forEach(
+        action -> cartUpdater.handle(cart, action)
+    );
+    return this.cartRepository.save(cart);
   }
 
   /**

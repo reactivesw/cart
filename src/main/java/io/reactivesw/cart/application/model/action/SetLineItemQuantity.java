@@ -2,9 +2,11 @@ package io.reactivesw.cart.application.model.action;
 
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
-
 import lombok.Data;
 
+import java.io.Serializable;
+
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -13,7 +15,7 @@ import javax.validation.constraints.NotNull;
  * Created by umasuo on 16/12/5.
  */
 @Data
-public class SetLineItemQuantity implements UpdateAction {
+public class SetLineItemQuantity implements UpdateAction, Serializable {
 
   /**
    * line item id.
@@ -28,6 +30,7 @@ public class SetLineItemQuantity implements UpdateAction {
    * the minimum is 1.
    */
   @NotNull
+  @Min(1)
   private Integer quantity;
 
   @Override

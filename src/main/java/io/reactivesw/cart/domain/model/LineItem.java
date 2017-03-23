@@ -36,24 +36,12 @@ public class LineItem {
    * a snap shop for variant.
    */
   @Column(name = "variant_id")
-  private Integer variant;
+  private Integer variantId;
 
   /**
    * quantity.
    */
   @Column
   private Integer quantity;
-
-  /**
-   * supplyChannel.
-   */
-  @Column(name = "supply_channel")
-  private String supplyChannel;
-
-  /**
-   * distributionChannel.
-   */
-  @Column(name = "distribution_channel")
-  private String distributionChannel;
 
 }

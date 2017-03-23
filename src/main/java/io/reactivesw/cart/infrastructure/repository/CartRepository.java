@@ -8,9 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-/**
- * Created by umasuo on 16/11/29.
- */
 @Repository
 public interface CartRepository extends JpaRepository<Cart, String>,
     CrudRepository<Cart, String> {
