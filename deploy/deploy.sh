@@ -49,5 +49,5 @@ echo '=============================finish gcloud container cluster credentials==
 echo '=============================kubectl create yaml==================================='
 kubectl delete deployment cart
 kubectl delete service cart
-kubectl create -f ./k8s.yaml
+kubectl create -f ./deploy/k8s.yaml
 echo '=============================finish kubectl create yaml============================'
