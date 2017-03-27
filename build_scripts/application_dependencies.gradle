@@ -31,5 +31,5 @@ dependencies {
     // Security, like password encoder.
     compile('org.springframework.security:spring-security-crypto')
 
-    compile("io.reactivesw:commons:0.0.1")
+    compile("io.reactivesw:commons:0.0.2")
 }

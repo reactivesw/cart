@@ -5,9 +5,3 @@ spring:
     config:
       uri: http://localhost:8888/
 
-product:
-  service:
-    uri: http://35.184.19.183/products/
-customer:
-  service:
-    uri: http://localhost:8084/

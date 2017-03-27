@@ -19,7 +19,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Objects;
-import java.util.Optional;
 
 /**
  * Created by umasuo on 16/11/29.
@@ -149,31 +148,17 @@ public class CartService {
   }
 
   /**
-   * update cart for with action list.
+   * update Cart.
    *
-   * @param id         String of cart id
-   * @param version    Integer
-   * @param cartEntity CartEntity
-   * @return CartEntity
+   * @param id
+   * @param version
+   * @param actions
+   * @return
    */
-  @Transactional
-  public Cart updateCart(String id, Integer version, Cart cartEntity) {
-    Cart cart = this.getById(id);
-
-    this.checkVersion(version, cart.getVersion());
-
-    if (cart.getCartState() != CartState.Active) {
-      LOG.debug("Only active CartView can be changed, id:{}", id);
-      throw new ImmutableException("Only active CartView can be changed");
-    }
-
-    return this.cartRepository.save(cartEntity);
-  }
-
   public Cart updateCart(String id, Integer version, List<UpdateAction> actions) {
     Cart cart = this.getById(id);
 
-    this.checkVersion(version, cart.getVersion());
+    this.validateVersion(version, cart.getVersion());
     if (cart.getCartState() != CartState.Active) {
       LOG.debug("Only active CartView can be changed, id:{}", id);
       throw new ImmutableException("Only active CartView can be changed");
@@ -243,7 +228,7 @@ public class CartService {
     LOG.debug("enter, id: {}, version: {}", id, version);
     Cart cart = this.getById(id);
 
-    this.checkVersion(version, cart.getVersion());
+    this.validateVersion(version, cart.getVersion());
 
     if (cart.getCartState() != CartState.Active) {
       LOG.debug("Only active CartView can be changed, id:{}", id);
@@ -259,7 +244,7 @@ public class CartService {
    * @param inputVersion Integer
    * @param savedVersion Integer
    */
-  private void checkVersion(Integer inputVersion, Integer savedVersion) {
+  private void validateVersion(Integer inputVersion, Integer savedVersion) {
     if (!Objects.equals(inputVersion, savedVersion)) {
       LOG.debug("CartView version is not correct. inputVersion:{}, savedVersion:{}",
           inputVersion, savedVersion);

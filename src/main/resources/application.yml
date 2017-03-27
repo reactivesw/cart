@@ -17,3 +17,11 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: update
+
+
+product:
+  service:
+    uri: http://35.184.19.183/products/
+customer:
+  service:
+    uri: http://localhost:8084/
