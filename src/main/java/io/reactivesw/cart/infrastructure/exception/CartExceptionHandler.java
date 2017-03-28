@@ -1,8 +1,6 @@
 package io.reactivesw.cart.infrastructure.exception;
 
 import io.reactivesw.exception.handler.ExceptionHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerExceptionResolver;
 import org.springframework.web.servlet.ModelAndView;
@@ -10,11 +8,21 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+/**
+ * cart exception handler.
+ */
 @Component
-public class CartExceptionHandler  extends ExceptionHandler implements HandlerExceptionResolver {
+public class CartExceptionHandler extends ExceptionHandler implements HandlerExceptionResolver {
 
-  private static Logger logger = LoggerFactory.getLogger(CartExceptionHandler.class);
-
+  /**
+   * exception resolver.
+   *
+   * @param request
+   * @param response
+   * @param handler
+   * @param ex
+   * @return
+   */
   @Override
   public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,
                                        Object handler, Exception ex) {

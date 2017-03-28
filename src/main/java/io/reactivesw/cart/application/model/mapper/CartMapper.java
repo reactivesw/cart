@@ -3,7 +3,15 @@ package io.reactivesw.cart.application.model.mapper;
 import io.reactivesw.cart.application.model.CartView;
 import io.reactivesw.cart.domain.model.Cart;
 
-public class CartMapper {
+/**
+ * cart mapper.
+ */
+public final class CartMapper {
+  /**
+   * default private constructor.
+   */
+  private CartMapper() {
+  }
 
   /**
    * convert entity to model.
@@ -22,7 +30,7 @@ public class CartMapper {
       cart.setLastModifiedAt(entity.getLastModifiedAt());
       cart.setCustomerId(entity.getCustomerId());
       cart.setAnonymousId(entity.getAnonymousId());
-      cart.setCartState(entity.getCartState());
+      cart.setCartStatus(entity.getCartState());
     }
     return cart;
   }

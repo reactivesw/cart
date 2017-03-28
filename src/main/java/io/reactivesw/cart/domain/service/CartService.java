@@ -1,7 +1,7 @@
 package io.reactivesw.cart.domain.service;
 
 import io.reactivesw.cart.domain.model.Cart;
-import io.reactivesw.cart.infrastructure.enums.CartState;
+import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import io.reactivesw.cart.infrastructure.repository.CartRepository;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.cart.infrastructure.update.UpdaterService;
@@ -63,10 +63,10 @@ public class CartService {
     List<Cart> result = null;
     if (StringUtils.isNotBlank(customerId)) {
       result = this.cartRepository.findByCustomerIdAndCartState(anonymousId,
-          CartState.Active);
+          CartStatus.Active);
     } else if (StringUtils.isNotBlank(anonymousId)) {
       result = this.cartRepository.findByCustomerIdAndCartState(anonymousId,
-          CartState.Active);
+          CartStatus.Active);
     }
 
     if (result != null && !result.isEmpty()) {
@@ -98,10 +98,10 @@ public class CartService {
    * get cart by customer id and cart state.
    *
    * @param customerId String
-   * @param state      CartState
+   * @param state      CartStatus
    * @return CartEntity
    */
-  public List<Cart> getCartByCustomerIdAndState(String customerId, CartState state) {
+  public List<Cart> getCartByCustomerIdAndState(String customerId, CartStatus state) {
     return this.cartRepository.findByCustomerIdAndCartState(customerId, state);
   }
 
@@ -117,7 +117,7 @@ public class CartService {
     LOG.debug("subjectId:{}", customerId);
 
     List<Cart> result = this.cartRepository.findByCustomerIdAndCartState(customerId,
-        CartState.Active);
+        CartStatus.Active);
     Cart cart = result.parallelStream().findAny().orElse(null);
 
     if (cart == null) {
@@ -159,7 +159,7 @@ public class CartService {
     Cart cart = this.getById(id);
 
     this.validateVersion(version, cart.getVersion());
-    if (cart.getCartState() != CartState.Active) {
+    if (cart.getCartState() != CartStatus.Active) {
       LOG.debug("Only active CartView can be changed, id:{}", id);
       throw new ImmutableException("Only active CartView can be changed");
     }
@@ -190,7 +190,7 @@ public class CartService {
   private Cart createActiveCartWithCustomerId(String customerId) {
     Cart cart = new Cart();
     cart.setCustomerId(customerId);
-    cart.setCartState(CartState.Active);
+    cart.setCartState(CartStatus.Active);
     Cart savedCart = cartRepository.save(cart);
     LOG.info("Create a new active cart with subjectId:{}, entity:{}", customerId, savedCart
         .toString());
@@ -209,7 +209,7 @@ public class CartService {
 
     Cart cart = new Cart();
     cart.setAnonymousId(anonymousId);
-    cart.setCartState(CartState.Active);
+    cart.setCartState(CartStatus.Active);
     Cart savedCart = cartRepository.save(cart);
 
     LOG.debug("Create a new active cart with anonymousId:{}, entity:{}", anonymousId, savedCart
@@ -230,7 +230,7 @@ public class CartService {
 
     this.validateVersion(version, cart.getVersion());
 
-    if (cart.getCartState() != CartState.Active) {
+    if (cart.getCartState() != CartStatus.Active) {
       LOG.debug("Only active CartView can be changed, id:{}", id);
       throw new ImmutableException("Only active CartView can be changed");
     }

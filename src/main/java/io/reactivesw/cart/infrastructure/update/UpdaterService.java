@@ -1,14 +1,10 @@
 package io.reactivesw.cart.infrastructure.update;
 
-import com.google.common.collect.ImmutableMap;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.model.Updater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Service;
-
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * we may got two kind of update: just use the data in action, or still use data from other service.
@@ -18,11 +14,6 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 @Service
 public class UpdaterService implements Updater<Cart, UpdateAction> {
-
-  /**
-   * ImmutableMap for discount code update mapper.
-   */
-  Map<Class<?>, Updater> updateMappers = new ConcurrentHashMap<>();
 
   /**
    * ApplicationContext for get update services.
@@ -49,11 +40,7 @@ public class UpdaterService implements Updater<Cart, UpdateAction> {
    * @return ZoneUpdateMapper
    */
   private Updater getUpdateService(UpdateAction action) {
-    Updater updater = updateMappers.get(action.getActionName());
-    if (updater == null) {
-      updater = (Updater) context.getBean(action.getActionName());
-    }
-    return updater;
+    return (Updater) context.getBean(action.getActionName());
   }
 
 }

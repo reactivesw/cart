@@ -1,8 +1,10 @@
 package io.reactivesw.cart.application.model.action;
 
-import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import lombok.Data;
+
+import java.io.Serializable;
 
 import javax.validation.constraints.NotNull;
 
@@ -11,10 +13,14 @@ import javax.validation.constraints.NotNull;
  * When the customer ID is set, the LineItem prices are updated.(for customer may be in an
  * customer group)
  * <p>
- * Created by umasuo on 16/12/15.
  */
 @Data
-public class SetCustomerId implements UpdateAction {
+public class SetCustomerId implements UpdateAction, Serializable {
+
+  /**
+   * auto generated serial version.
+   */
+  private static final long serialVersionUID = 6896135429076233138L;
 
   /**
    * customer id.
@@ -23,6 +29,11 @@ public class SetCustomerId implements UpdateAction {
   @NotNull
   private String customerId;
 
+  /**
+   * get action name.
+   *
+   * @return
+   */
   @Override
   public String getActionName() {
     return CartUpdateActionUtils.SET_CUSTOMER_ID;

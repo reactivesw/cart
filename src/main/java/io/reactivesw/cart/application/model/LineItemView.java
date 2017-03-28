@@ -7,27 +7,54 @@ import lombok.Data;
 import java.util.List;
 
 /**
- * Created by umasuo on 16/11/17.
+ * line item view.
  */
 @Data
 public class LineItemView {
 
+  /**
+   * id.
+   */
   private String id;
 
+  /**
+   * product id.
+   */
   private String productId;
 
+  /**
+   * name.
+   */
   private LocalizedString name;
 
+  /**
+   * variant id.
+   */
   private Integer variantId;
 
+  /**
+   * sku.
+   */
   private String sku;
 
+  /**
+   * list of imageViews.
+   */
   private List<ImageView> images;
 
+  /**
+   * price.
+   */
   private Money price;
 
+  /**
+   * total price.
+   */
   private Money totalPrice;
 
+  /**
+   * quantity.
+   */
   private Integer quantity;
 
 }

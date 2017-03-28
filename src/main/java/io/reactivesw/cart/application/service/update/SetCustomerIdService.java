@@ -4,16 +4,19 @@ import io.reactivesw.cart.application.model.action.SetCustomerId;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.service.CartService;
-import io.reactivesw.cart.infrastructure.enums.CartState;
+import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import io.reactivesw.cart.infrastructure.repository.CartRepository;
-import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import io.reactivesw.model.Updater;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * set customer Id.
+ */
 @Service(value = CartUpdateActionUtils.SET_CUSTOMER_ID)
 public class SetCustomerIdService implements Updater<Cart, UpdateAction> {
 
@@ -23,11 +26,18 @@ public class SetCustomerIdService implements Updater<Cart, UpdateAction> {
   @Autowired
   private transient CartService cartService;
 
+  /**
+   * cart repository.
+   */
   @Autowired
   private transient CartRepository cartRepository;
 
+  /**
+   * add line item service.
+   */
   @Autowired
-  private AddLineItemService addLineItemService;
+  private transient AddLineItemService addLineItemService;
+
   /**
    * set the customer id, then update the price and merge the customer's active cart.
    *
@@ -45,7 +55,7 @@ public class SetCustomerIdService implements Updater<Cart, UpdateAction> {
     }
     cart.setCustomerId(customerId);
 
-    existCart.setCartState(CartState.Merged);
+    existCart.setCartState(CartStatus.Merged);
     cartRepository.save(existCart);
   }
 
@@ -58,7 +68,7 @@ public class SetCustomerIdService implements Updater<Cart, UpdateAction> {
   private void mergeCart(Cart originCart, Cart existCart) {
     List<LineItem> lineItems = existCart.getLineItems();
     lineItems.stream().forEach(
-        lineItem -> addLineItemService.addLineItem(originCart,lineItem)
+        lineItem -> addLineItemService.addLineItem(originCart, lineItem)
     );
   }
 }

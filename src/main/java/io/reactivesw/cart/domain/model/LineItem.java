@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * Created by umasuo on 16/11/28.
+ * line item entity.
  */
 @Entity
 @Table(name = "line_item")
@@ -19,11 +19,14 @@ import javax.persistence.Table;
 @EqualsAndHashCode(callSuper = false)
 public class LineItem {
 
+  /**
+   * uuid.
+   */
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
   @Column(name = "id")
-  protected String id;
+  private String id;
 
   /**
    * product id.

@@ -8,6 +8,9 @@ import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 import io.reactivesw.model.Updater;
 import org.springframework.stereotype.Service;
 
+/**
+ * add line item service.
+ */
 @Service(value = CartUpdateActionUtils.ADD_LINE_ITEM)
 public class AddLineItemService implements Updater<Cart, UpdateAction> {
 
@@ -24,7 +27,12 @@ public class AddLineItemService implements Updater<Cart, UpdateAction> {
     addLineItem(cart, item);
   }
 
-
+  /**
+   * add line item.
+   *
+   * @param cart
+   * @param item
+   */
   public void addLineItem(Cart cart, LineItem item) {
     LineItem value = cart.getLineItems().stream().filter(
         lineItemValue -> lineItemValue.getProductId().equals(item.getProductId())

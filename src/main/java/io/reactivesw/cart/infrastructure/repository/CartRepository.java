@@ -1,13 +1,16 @@
 package io.reactivesw.cart.infrastructure.repository;
 
 import io.reactivesw.cart.domain.model.Cart;
-import io.reactivesw.cart.infrastructure.enums.CartState;
+import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * cart repository.
+ */
 @Repository
 public interface CartRepository extends JpaRepository<Cart, String>,
     CrudRepository<Cart, String> {
@@ -26,7 +29,7 @@ public interface CartRepository extends JpaRepository<Cart, String>,
    * @param customerId String
    * @return list of cart, but can contains one at most.
    */
-  List<Cart> findByCustomerIdAndCartState(String customerId, CartState cartState);
+  List<Cart> findByCustomerIdAndCartState(String customerId, CartStatus cartState);
 
   /**
    * find the active cart by anonymous id.

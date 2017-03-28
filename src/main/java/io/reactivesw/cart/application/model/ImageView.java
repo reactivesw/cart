@@ -3,6 +3,9 @@ package io.reactivesw.cart.application.model;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 
+/**
+ * image view.
+ */
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ImageView {

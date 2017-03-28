@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * set line item quantity service.
+ */
 @Service(value = CartUpdateActionUtils.SET_LINE_ITEM_QUANTITY)
 public class SetLineItemQuantityService implements Updater<Cart, UpdateAction> {
 
