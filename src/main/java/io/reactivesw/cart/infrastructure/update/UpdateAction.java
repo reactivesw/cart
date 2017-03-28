@@ -11,7 +11,6 @@ import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
 /**
  * configurations for common update actions that will be used in more thant one service
  * and this action also extends other action configure in each service.
- * Created by umasuo on 16/11/21.
  */
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property =
     "action")
@@ -23,5 +22,10 @@ import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
         .SET_LINE_ITEM_QUANTITY),
 })
 public interface UpdateAction {
+  /**
+   * get action name.
+   *
+   * @return
+   */
   String getActionName();
 }

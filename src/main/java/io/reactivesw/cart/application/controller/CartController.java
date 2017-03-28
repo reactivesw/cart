@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.validation.constraints.NotNull;
 
 /**
- * Created by umasuo on 16/11/21.
+ * cart controller.
  */
 @RestController
 @CrossOrigin
@@ -41,6 +41,12 @@ public class CartController {
    */
   private transient CartApplication cartApplication;
 
+  /**
+   * constructor.
+   *
+   * @param cartService
+   * @param cartApplication
+   */
   @Autowired
   public CartController(CartService cartService, CartApplication cartApplication) {
     this.cartService = cartService;

@@ -1,9 +1,9 @@
 package io.reactivesw.cart.infrastructure.enums;
 
 /**
- * Created by umasuo on 16/11/17.
+ * cart status.
  */
-public enum CartState {
+public enum CartStatus {
 
   /**
    * The cart can be updated and ordered. It is the default state.

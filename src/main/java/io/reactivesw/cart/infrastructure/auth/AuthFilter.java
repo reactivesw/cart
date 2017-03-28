@@ -10,8 +10,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -23,7 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Created by umasuo on 17/3/2.
+ * auth filter.
  */
 //@Component
 public class AuthFilter implements Filter {
@@ -34,11 +32,6 @@ public class AuthFilter implements Filter {
   private static final Logger LOG = LoggerFactory.getLogger(AuthFilter.class);
 
   /**
-   * exclude url, that do not need token.
-   */
-  private static final List<String> EXCLUDE_URL = new ArrayList<>();
-
-  /**
    * JWT(json web token) util
    */
   @Autowired
@@ -47,6 +40,9 @@ public class AuthFilter implements Filter {
 //  @Autowired
 //  private transient CartAuthProvider authProvider;
 
+  /**
+   * cart exception handler.
+   */
   @Autowired
   private transient CartExceptionHandler exceptionHandler;
 
@@ -78,18 +74,6 @@ public class AuthFilter implements Filter {
       exceptionHandler.setResponse((HttpServletRequest) request, (HttpServletResponse) response,
           null, ex);
     }
-  }
-
-  /**
-   * check if the path should check auth.
-   *
-   * @param path
-   * @return
-   */
-  private boolean shouldCheckAuth(String path) {
-    return EXCLUDE_URL.parallelStream().noneMatch(
-        s -> path.startsWith(s)
-    );
   }
 
   /**

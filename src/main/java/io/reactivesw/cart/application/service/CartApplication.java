@@ -8,7 +8,6 @@ import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
-import io.reactivesw.cart.infrastructure.update.UpdaterService;
 import io.reactivesw.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by umasuo on 16/12/28.
+ * cart application.
  */
 @Service
 public class CartApplication {
@@ -40,12 +39,6 @@ public class CartApplication {
    */
   @Autowired
   private transient CartRestClient restClient;
-
-  /**
-   * cart update service.
-   */
-  @Autowired
-  private transient UpdaterService cartUpdater;
 
   /**
    * cart LineItem service.

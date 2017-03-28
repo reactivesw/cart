@@ -12,6 +12,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * remove line item service.
+ */
 @Service(value = CartUpdateActionUtils.REMOVE_LINE_ITEM)
 public class RemoveLineItemService implements Updater<Cart, UpdateAction> {
 

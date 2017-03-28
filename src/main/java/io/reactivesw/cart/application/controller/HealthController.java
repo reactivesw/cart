@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import static io.reactivesw.cart.infrastructure.Router.CART_HEALTH_CHECK;
 
 /**
- * Created by umasuo on 17/2/21.
+ * health api.
  */
 @RestController
 @Configuration
@@ -18,7 +18,7 @@ public class HealthController {
    * service name.
    */
   @Value("${spring.application.name}")
-  private String serviceName;
+  private transient String serviceName;
 
   /**
    * this api is used for health check.

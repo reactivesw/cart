@@ -1,6 +1,6 @@
 package io.reactivesw.cart.domain.model;
 
-import io.reactivesw.cart.infrastructure.enums.CartState;
+import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.GenericGenerator;
@@ -22,6 +22,9 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
+/**
+ * cart entity.
+ */
 @Entity
 @Table(name = "cart")
 @Data
@@ -29,6 +32,9 @@ import javax.persistence.Version;
 @EntityListeners(AuditingEntityListener.class)
 public class Cart {
 
+  /**
+   * uuid.
+   */
   @Id
   @GeneratedValue(generator = "uuid")
   @GenericGenerator(name = "uuid", strategy = "uuid2")
@@ -78,6 +84,6 @@ public class Cart {
    * cart status.
    */
   @Column
-  private CartState cartState;
+  private CartStatus cartState;
 
 }

@@ -1,12 +1,9 @@
 package io.reactivesw.cart.infrastructure.util;
 
+/**
+ * cart update action utils.
+ */
 public final class CartUpdateActionUtils {
-
-  /**
-   * default private constructor.
-   */
-  private CartUpdateActionUtils() {
-  }
 
   /**
    * add lineItem.
@@ -28,5 +25,12 @@ public final class CartUpdateActionUtils {
    * set customer id.
    */
   public static final String SET_CUSTOMER_ID = "setCustomerId";
+
+
+  /**
+   * default private constructor.
+   */
+  private CartUpdateActionUtils() {
+  }
 
 }

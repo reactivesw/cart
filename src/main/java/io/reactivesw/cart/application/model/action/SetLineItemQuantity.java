@@ -12,10 +12,14 @@ import javax.validation.constraints.NotNull;
 /**
  * Set the LineItem quantity, minimum is 1.
  * cart.
- * Created by umasuo on 16/12/5.
  */
 @Data
 public class SetLineItemQuantity implements UpdateAction, Serializable {
+
+  /**
+   * auto generated time.
+   */
+  private static final long serialVersionUID = -8456086644392778829L;
 
   /**
    * line item id.
@@ -33,6 +37,11 @@ public class SetLineItemQuantity implements UpdateAction, Serializable {
   @Min(1)
   private Integer quantity;
 
+  /**
+   * get action name.
+   *
+   * @return
+   */
   @Override
   public String getActionName() {
     return CartUpdateActionUtils.SET_LINE_ITEM_QUANTITY;

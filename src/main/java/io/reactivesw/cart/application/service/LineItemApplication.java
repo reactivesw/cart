@@ -7,7 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 /**
- * Created by umasuo on 16/12/12.
+ * line item application.
  */
 @Service
 public class LineItemApplication {
@@ -24,6 +24,7 @@ public class LineItemApplication {
    * @param item LineItem
    */
   public void calculateItemPrice(LineItemView item) {
+    LOG.debug("enter. lineItem: {}", item);
     if (item.getPrice() != null) {
       Money price = item.getPrice();
 
@@ -36,5 +37,6 @@ public class LineItemApplication {
       total.setCentAmount(totalPrice);
       item.setTotalPrice(total);
     }
+    LOG.debug("exit. lineItem: {}", item);
   }
 }

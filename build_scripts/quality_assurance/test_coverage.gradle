@@ -1,11 +1,12 @@
 // for spock unit test
 apply plugin: 'groovy'
+apply plugin: 'com.palantir.jacoco-coverage'
 dependencies {
     testCompile('org.springframework.boot:spring-boot-starter-test')
     testCompile('org.spockframework:spock-spring')
 }
 
-apply plugin: 'com.palantir.jacoco-coverage'
+
 
 jacocoCoverage { // Enforce minimum code coverage of 80% for every Java file.
     // Minimum 'branch' coverage of 80% for all files.
