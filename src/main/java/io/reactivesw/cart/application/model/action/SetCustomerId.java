@@ -12,7 +12,6 @@ import javax.validation.constraints.NotNull;
  * Sets the customer ID of the cart.
  * When the customer ID is set, the LineItem prices are updated.(for customer may be in an
  * customer group)
- * <p>
  */
 @Data
 public class SetCustomerId implements UpdateAction, Serializable {
@@ -32,7 +31,7 @@ public class SetCustomerId implements UpdateAction, Serializable {
   /**
    * get action name.
    *
-   * @return
+   * @return String
    */
   @Override
   public String getActionName() {

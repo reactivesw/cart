@@ -66,8 +66,8 @@ public class CartApplication {
   /**
    * get cart by cart id.
    *
-   * @param id
-   * @return
+   * @param id cart id
+   * @return CartView
    */
   public CartView getCartById(String id) {
     Cart entity = cartService.getById(id);
@@ -92,7 +92,7 @@ public class CartApplication {
   }
 
   /**
-   * fetch data from other service, and then fill it into the cart
+   * fetch data from other service, and then fill it into the cart.
    *
    * @return Cart
    */
@@ -113,7 +113,7 @@ public class CartApplication {
    * fill the line items' info.
    *
    * @param cartView  Cart
-   * @param lineItems Set<LineItemValue>
+   * @param lineItems list of LineItemValue
    */
   private void fillLineItem(CartView cartView, List<LineItem> lineItems) {
     LOGGER.debug("enter: cart: {}, lineItems: {}", cartView, lineItems);
@@ -148,7 +148,7 @@ public class CartApplication {
 
 
   /**
-   * calculate cart total price
+   * calculate cart total price.
    *
    * @param cart Cart
    */

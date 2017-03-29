@@ -47,8 +47,8 @@ public class SetLineItemQuantityService implements Updater<Cart, UpdateAction> {
         tmpItem -> StringUtils.equals(tmpItem.getId(), lineItemId)
     ).findAny().orElse(null);
     if (item == null) {
-      throw new NotExistException("LineItem not existing when for cartId: " + cart.getId() +
-          "lineItemId:" + lineItemId);
+      throw new NotExistException("LineItem not existing when for cartId: " + cart.getId()
+          + "lineItemId:" + lineItemId);
     }
     return item;
   }

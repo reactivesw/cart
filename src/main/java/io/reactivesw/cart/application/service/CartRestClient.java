@@ -39,8 +39,8 @@ public class CartRestClient {
   public ProductView getProduct(String productId, Integer variantId) {
     LOG.debug("enter: productId: {}", productId);
 
-    String url = productUri + "CartProducts/" + productId + "?variantId=" +
-        variantId;
+    String url = productUri + "CartProducts/" + productId + "?variantId="
+        + variantId;
     ProductView product = null;
     try {
       LOG.debug("ProductUri: {}", url);
