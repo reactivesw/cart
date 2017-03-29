@@ -27,7 +27,7 @@ public class CartRestClient {
   /**
    * product uri.
    */
-  @Value("{product.service.uri:http://products/}")
+  @Value("${product.service.uri:http://products/}")
   private transient String productUri;
 
   /**
