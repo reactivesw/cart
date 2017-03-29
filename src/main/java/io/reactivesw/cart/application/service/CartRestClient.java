@@ -45,5 +45,4 @@ public class CartRestClient {
     LOG.debug("exit: product: {}", product);
     return product;
   }
-
 }
