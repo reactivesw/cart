@@ -40,6 +40,7 @@ public class AddLineItemService implements Updater<Cart, UpdateAction> {
     ).findAny().orElse(null);
 
     if (value == null) {
+      //TODO check if the product exist, if not exist, then will not add
       cart.getLineItems().add(item);
     } else {
       //if exist, then just add the quantity

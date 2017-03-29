@@ -29,7 +29,7 @@ public interface CartRepository extends JpaRepository<Cart, String>,
    * @param customerId String
    * @return list of cart, but can contains one at most.
    */
-  List<Cart> findByCustomerIdAndCartState(String customerId, CartStatus cartState);
+  List<Cart> findByCustomerIdAndCartStatus(String customerId, CartStatus cartStatus);
 
   /**
    * find the active cart by anonymous id.

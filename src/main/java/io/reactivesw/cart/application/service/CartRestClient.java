@@ -5,6 +5,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 /**
@@ -26,7 +27,7 @@ public class CartRestClient {
   /**
    * product uri.
    */
-  @Value("{product.service.uri}")
+  @Value("{product.service.uri:http://products/}")
   private transient String productUri;
 
   /**
@@ -40,7 +41,13 @@ public class CartRestClient {
 
     String url = productUri + "CartProducts/" + productId + "?variantId=" +
         variantId;
-    ProductView product = restTemplate.getForObject(url, ProductView.class);
+    ProductView product = null;
+    try {
+      LOG.debug("ProductUri: {}", url);
+      product = restTemplate.getForObject(url, ProductView.class);
+    } catch (HttpClientErrorException ex) {
+      LOG.debug("Get Product from product service failed. uri: {}", url);
+    }
 
     LOG.debug("exit: product: {}", product);
     return product;

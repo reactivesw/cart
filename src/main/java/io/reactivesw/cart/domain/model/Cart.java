@@ -84,6 +84,6 @@ public class Cart {
    * cart status.
    */
   @Column
-  private CartStatus cartState;
+  private CartStatus cartStatus;
 
 }
