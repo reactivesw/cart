@@ -30,7 +30,7 @@ public final class CartMapper {
       cart.setLastModifiedAt(entity.getLastModifiedAt());
       cart.setCustomerId(entity.getCustomerId());
       cart.setAnonymousId(entity.getAnonymousId());
-      cart.setCartStatus(entity.getCartState());
+      cart.setCartStatus(entity.getCartStatus());
     }
     return cart;
   }

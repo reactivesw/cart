@@ -125,17 +125,20 @@ public class CartApplication {
 
             ProductView product = restClient.getProduct(lineItem.getProductId(), lineItem
                 .getVariantId());
+            if (product != null) {
 
-            LineItemView itemView = new LineItemView();
-            itemView.setId(lineItem.getId());
-            itemView.setQuantity(lineItem.getQuantity());
-            itemView.setProductId(lineItem.getProductId());
-            itemView.setVariantId(lineItem.getVariantId());
-            itemView.setName(product.getName());
-            itemView.setImages(product.getImages());
-            itemView.setPrice(product.getPrice().getValue());
-            itemView.setSku(product.getSku());
-            items.add(itemView);
+              //todo if the product not exit anymore, the auto delete the product?
+              LineItemView itemView = new LineItemView();
+              itemView.setId(lineItem.getId());
+              itemView.setQuantity(lineItem.getQuantity());
+              itemView.setProductId(lineItem.getProductId());
+              itemView.setVariantId(lineItem.getVariantId());
+              itemView.setName(product.getName());
+              itemView.setImages(product.getImages());
+              itemView.setPrice(product.getPrice().getValue());
+              itemView.setSku(product.getSku());
+              items.add(itemView);
+            }
           }
       );
       LOGGER.debug("exit: cart: {}", cartView);

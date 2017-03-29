@@ -55,7 +55,7 @@ public class SetCustomerIdService implements Updater<Cart, UpdateAction> {
     }
     cart.setCustomerId(customerId);
 
-    existCart.setCartState(CartStatus.Merged);
+    existCart.setCartStatus(CartStatus.Merged);
     cartRepository.save(existCart);
   }
 
