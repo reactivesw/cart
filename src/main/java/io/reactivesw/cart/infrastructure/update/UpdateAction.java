@@ -19,13 +19,12 @@ import io.reactivesw.cart.infrastructure.util.CartUpdateActionUtils;
     @JsonSubTypes.Type(value = RemoveLineItem.class, name = CartUpdateActionUtils.REMOVE_LINE_ITEM),
     @JsonSubTypes.Type(value = SetCustomerId.class, name = CartUpdateActionUtils.SET_CUSTOMER_ID),
     @JsonSubTypes.Type(value = SetLineItemQuantity.class, name = CartUpdateActionUtils
-        .SET_LINE_ITEM_QUANTITY),
-})
+        .SET_LINE_ITEM_QUANTITY)})
 public interface UpdateAction {
   /**
    * get action name.
    *
-   * @return
+   * @return String.
    */
   String getActionName();
 }

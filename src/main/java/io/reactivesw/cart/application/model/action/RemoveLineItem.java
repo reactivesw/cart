@@ -35,7 +35,7 @@ public class RemoveLineItem implements UpdateAction, Serializable {
   /**
    * get action name.
    *
-   * @return
+   * @return String
    */
   @Override
   public String getActionName() {

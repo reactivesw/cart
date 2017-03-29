@@ -42,16 +42,16 @@ public class UpdateRequest {
   /**
    * get version.
    *
-   * @return
+   * @return Integer
    */
   public Integer getVersion() {
     return version;
   }
 
   /**
-   * set version
+   * set version.
    *
-   * @param version
+   * @param version Integer
    */
   public void setVersion(Integer version) {
     this.version = version;
@@ -60,7 +60,7 @@ public class UpdateRequest {
   /**
    * set actions.
    *
-   * @param actions
+   * @param actions List of UpdateAction
    */
   public void setActions(List<UpdateAction> actions) {
     this.actions = actions;

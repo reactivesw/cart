@@ -150,10 +150,10 @@ public class CartService {
   /**
    * update Cart.
    *
-   * @param id
-   * @param version
-   * @param actions
-   * @return
+   * @param id      String
+   * @param version Integer
+   * @param actions List of UpdateAction
+   * @return Cart
    */
   public Cart updateCart(String id, Integer version, List<UpdateAction> actions) {
     Cart cart = this.getById(id);

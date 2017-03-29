@@ -17,11 +17,11 @@ public class CartExceptionHandler extends ExceptionHandler implements HandlerExc
   /**
    * exception resolver.
    *
-   * @param request
-   * @param response
-   * @param handler
-   * @param ex
-   * @return
+   * @param request  HttpServletRequest
+   * @param response HttpServletResponse
+   * @param handler  Object
+   * @param ex       Exception
+   * @return ModelAndView
    */
   @Override
   public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response,

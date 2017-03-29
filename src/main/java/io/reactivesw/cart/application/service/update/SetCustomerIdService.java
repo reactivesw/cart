@@ -62,8 +62,8 @@ public class SetCustomerIdService implements Updater<Cart, UpdateAction> {
   /**
    * merge this cart.
    *
-   * @param originCart
-   * @param existCart
+   * @param originCart Cart
+   * @param existCart  Cart
    */
   private void mergeCart(Cart originCart, Cart existCart) {
     List<LineItem> lineItems = existCart.getLineItems();

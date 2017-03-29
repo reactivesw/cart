@@ -30,8 +30,8 @@ public class AddLineItemService implements Updater<Cart, UpdateAction> {
   /**
    * add line item.
    *
-   * @param cart
-   * @param item
+   * @param cart Cart
+   * @param item LineItem
    */
   public void addLineItem(Cart cart, LineItem item) {
     LineItem value = cart.getLineItems().stream().filter(

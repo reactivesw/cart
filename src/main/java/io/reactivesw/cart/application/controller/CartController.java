@@ -44,8 +44,8 @@ public class CartController {
   /**
    * constructor.
    *
-   * @param cartService
-   * @param cartApplication
+   * @param cartService CartService
+   * @param cartApplication CartApplication
    */
   @Autowired
   public CartController(CartService cartService, CartApplication cartApplication) {

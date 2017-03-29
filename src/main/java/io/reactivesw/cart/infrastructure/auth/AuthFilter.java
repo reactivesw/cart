@@ -32,13 +32,13 @@ public class AuthFilter implements Filter {
   private static final Logger LOG = LoggerFactory.getLogger(AuthFilter.class);
 
   /**
-   * JWT(json web token) util
+   * JWT(json web token) util.
    */
   @Autowired
   private transient JwtUtil jwtUtil;
 
-//  @Autowired
-//  private transient CartAuthProvider authProvider;
+  //  @Autowired
+  //  private transient CartAuthProvider authProvider;
 
   /**
    * cart exception handler.
@@ -92,7 +92,7 @@ public class AuthFilter implements Filter {
     String tokenString = header.substring(7);
 
     Token token = jwtUtil.parseToken(tokenString);
-//    authProvider.checkToken(token);
+    //    authProvider.checkToken(token);
 
     LOG.debug("customer auth token:{}", token);
   }
