@@ -25,9 +25,10 @@ public final class Router {
   public static final String CART_WITH_ID = CARTS_ROOT + ID_PATTERN;
 
   /**
-   * get one cart's shipping address.
+   * checkout.
    */
-  public static final String CART_SHIPPING_ADDRESS = CART_WITH_ID + "/shipping-address";
+  public static final String CART_CHECKOUT = CARTS_ROOT + ID_PATTERN + "/checkout";
+
 
   /**
    * The constant cart_health_check.

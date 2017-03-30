@@ -95,6 +95,23 @@ public class CartService {
   }
 
   /**
+   * get cart by cart Id.
+   *
+   * @param cartId String
+   * @return CartEntity
+   */
+  public Cart checkout(String cartId) {
+    LOG.debug("enter. cartId: {}", cartId);
+    Cart entity = this.cartRepository.findOne(cartId);
+    if (entity == null) {
+      throw new NotExistException("CartView not exist with id: " + cartId);
+    }
+    entity.setCartStatus(CartStatus.Ordered);
+    this.cartRepository.save(entity);
+    return entity;
+  }
+
+  /**
    * get cart by customer id and cart state.
    *
    * @param customerId String

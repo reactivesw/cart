@@ -70,6 +70,22 @@ public class CartController {
   }
 
   /**
+   * get cart by id.
+   *
+   * @param cartId the id
+   * @return the cart by id
+   */
+  @GetMapping(Router.CART_CHECKOUT)
+  public CartView checkout(@PathVariable(Router.CART_ID) String cartId) {
+    LOG.info("enter. id: {}", cartId);
+
+    Cart entity = cartService.checkout(cartId);
+
+    LOG.info("Exit entity: {}", entity);
+    return cartApplication.getFullCart(entity);
+  }
+
+  /**
    * get cart by customer id.
    *
    * @param customerId the customer id
