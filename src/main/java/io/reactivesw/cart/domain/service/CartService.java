@@ -102,13 +102,17 @@ public class CartService {
    */
   public Cart checkout(String cartId) {
     LOG.debug("enter. cartId: {}", cartId);
-    Cart entity = this.cartRepository.findOne(cartId);
-    if (entity == null) {
+    Cart cart = this.cartRepository.findOne(cartId);
+    if (cart == null) {
       throw new NotExistException("CartView not exist with id: " + cartId);
     }
-    entity.setCartStatus(CartStatus.Ordered);
-    this.cartRepository.save(entity);
-    return entity;
+    if (cart.getCartStatus() != CartStatus.Active) {
+      LOG.debug("Only active cart can be ordered, id: {}", cartId);
+      throw new ImmutableException("Only active Cart can be ordered");
+    }
+    cart.setCartStatus(CartStatus.Ordered);
+    this.cartRepository.save(cart);
+    return cart;
   }
 
   /**

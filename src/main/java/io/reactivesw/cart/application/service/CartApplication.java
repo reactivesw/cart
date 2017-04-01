@@ -26,7 +26,7 @@ public class CartApplication {
   /**
    * logger.
    */
-  private static final Logger LOGGER = LoggerFactory.getLogger(CartApplication.class);
+  private static final Logger LOG = LoggerFactory.getLogger(CartApplication.class);
 
   /**
    * cart service.
@@ -55,11 +55,11 @@ public class CartApplication {
    * @return CartEntity
    */
   public CartView updateCart(String id, Integer version, List<UpdateAction> actions) {
-    LOGGER.debug("enter: id{}, version: {}, actions: {}", id, version, actions);
+    LOG.debug("enter: id{}, version: {}, actions: {}", id, version, actions);
 
     Cart result = cartService.updateCart(id, version, actions);
 
-    LOGGER.debug("exit: result: {}", result);
+    LOG.debug("exit: result: {}", result);
     return getFullCart(result);
   }
 
@@ -81,13 +81,13 @@ public class CartApplication {
    * @return CartView
    */
   public CartView getFullCart(Cart cart) {
-    LOGGER.debug("enter: entity: {}", cart);
+    LOG.debug("enter: entity: {}", cart);
 
     CartView data = fillData(cart);
 
     calculateCartPrice(data);
 
-    LOGGER.debug("exit cart: {}", data);
+    LOG.debug("exit cart: {}", data);
     return data;
   }
 
@@ -97,14 +97,14 @@ public class CartApplication {
    * @return Cart
    */
   private CartView fillData(Cart cart) {
-    LOGGER.debug("enter: entity: {}", cart);
+    LOG.debug("enter: entity: {}", cart);
     //got the base info
     CartView cartView = CartMapper.entityToModel(cart);
 
     // fill the LineItem info
     fillLineItem(cartView, cart.getLineItems());
 
-    LOGGER.debug("end fillData, exit: cart: {}", cartView);
+    LOG.debug("end fillData, exit: cart: {}", cartView);
     return cartView;
   }
 
@@ -116,7 +116,7 @@ public class CartApplication {
    * @param lineItems list of LineItemValue
    */
   private void fillLineItem(CartView cartView, List<LineItem> lineItems) {
-    LOGGER.debug("enter: cart: {}, lineItems: {}", cartView, lineItems);
+    LOG.debug("enter: cart: {}, lineItems: {}", cartView, lineItems);
 
     if (lineItems != null) {
       List<LineItemView> items = new ArrayList<>();
@@ -141,7 +141,7 @@ public class CartApplication {
             }
           }
       );
-      LOGGER.debug("exit: cart: {}", cartView);
+      LOG.debug("exit: cart: {}", cartView);
       cartView.setLineItems(items);
     }
   }
@@ -153,7 +153,7 @@ public class CartApplication {
    * @param cart Cart
    */
   private void calculateCartPrice(CartView cart) {
-    LOGGER.debug("enter: cart: {}", cart);
+    LOG.debug("enter: cart: {}", cart);
     List<LineItemView> items = cart.getLineItems();
     int lineItemTotalPrice = 0;
     Money cartTotal = new Money();
@@ -177,6 +177,6 @@ public class CartApplication {
     // TODO need the currency code?
     cartTotal.setCentAmount(cartTotalPrice);
     cart.setTotalPrice(cartTotal);
-    LOGGER.debug("exit: cart: {}", cart);
+    LOG.debug("exit: cart: {}", cart);
   }
 }
