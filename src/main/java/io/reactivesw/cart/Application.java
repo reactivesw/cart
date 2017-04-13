@@ -5,7 +5,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
- * micro service entrance.
+ * Micro service entrance.
  */
 @SpringBootApplication(scanBasePackages = "io.reactivesw")
 @EnableScheduling
