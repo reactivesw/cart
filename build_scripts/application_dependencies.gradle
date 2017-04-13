@@ -19,8 +19,6 @@ dependencies {
     // Common tool like: StringUtils
     compile('org.apache.commons:commons-lang3:3.4')
 
-    // Google tools like: ImmutableMap
-    compile('com.google.api-client:google-api-client:1.22.0')
     compile('com.google.cloud:google-cloud-pubsub:0.11.0-alpha')
     compile('com.google.guava:guava:21.0')
 
