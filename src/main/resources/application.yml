@@ -25,3 +25,13 @@ product:
 customer:
   service:
     uri: http://localhost:8084/
+
+io:
+  reactivesw:
+    message:
+      broker:
+        host: http://umasuo.com
+      brokerType: google
+      google:
+        project:
+          id: reactivesw-project
