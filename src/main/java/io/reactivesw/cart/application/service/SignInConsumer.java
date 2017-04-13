@@ -102,21 +102,21 @@ public class SignInConsumer {
 
     if (anonymousId.equals(customerCart.getAnonymousId())) {
       LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
-    }
-
-    Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
-    if (anonymousCart == null) {
-      LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: {}.",
-          customerId, anonymousId);
-
-    } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
-      LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
 
     } else {
-      mergeCart(customerCart, anonymousCart);
+      Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
+      if (anonymousCart == null) {
+        LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
+            + "{}.", customerId, anonymousId);
+
+      } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
+        LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
+
+      } else {
+        mergeCart(customerCart, anonymousCart);
+      }
     }
   }
-
 
   /**
    * merge this cart.
@@ -133,7 +133,9 @@ public class SignInConsumer {
 
     // Save cart after merged.
     Cart mergedCart = cartRepository.save(customerCart);
-
+    //update anonymous cart's status.
+    anonymousCart.setCartStatus(CartStatus.Merged);
+    cartRepository.save(anonymousCart);
     LOG.trace("Exit. mergedCart: {}.", mergedCart);
   }
 
