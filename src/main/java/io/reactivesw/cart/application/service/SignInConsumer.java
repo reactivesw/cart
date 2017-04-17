@@ -81,7 +81,7 @@ public class SignInConsumer {
 
     events.stream().forEach(
         message -> {
-          SignInEvent event = jsonDeserializer.deserialize(message.getPayload().toString());
+          SignInEvent event = jsonDeserializer.deserialize(message.getData().toString());
           mergeCart(event.getCustomerId(), event.getCustomerId());
           consumer.acknowledgeMessage(message.getExternalId());//for google we put ach
           LOG.debug("Processed message. messageId: {},  externalId: {}", message.getId(), message
@@ -121,8 +121,8 @@ public class SignInConsumer {
   /**
    * merge this cart.
    *
-   * @param originCart Cart
-   * @param existCart  Cart
+   * @param customerCart  Cart
+   * @param anonymousCart Cart
    */
   private void mergeCart(Cart customerCart, Cart anonymousCart) {
     LOG.trace("Enter. customerCart: {}, anonymousCart: {}.", customerCart, anonymousCart);
