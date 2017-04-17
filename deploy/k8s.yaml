@@ -4,6 +4,7 @@ items:
 - kind: Deployment
   apiVersion: extensions/v1beta1
   metadata:
+    namespace: dev
     name: cart
   spec:
     replicas: 1
@@ -36,6 +37,7 @@ items:
   apiVersion: v1
   metadata:
     name: cart
+    namespace: dev
     labels:
       name: cart
   spec:
@@ -43,6 +45,6 @@ items:
     ports:
     - port: 80
       targetPort: 80
-      nodePort: 30002
+      nodePort: 30102
     selector:
       name: cart
