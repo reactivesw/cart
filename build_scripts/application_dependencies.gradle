@@ -19,8 +19,8 @@ dependencies {
     // Common tool like: StringUtils
     compile('org.apache.commons:commons-lang3:3.4')
 
-    // Google tools like: ImmutableMap
-    compile('com.google.api-client:google-api-client:1.22.0')
+    compile('com.google.cloud:google-cloud-pubsub:0.11.0-alpha')
+    compile('com.google.guava:guava:21.0')
 
     // For json web token
     compile("io.jsonwebtoken:jjwt:0.7.0")
@@ -32,4 +32,6 @@ dependencies {
     compile('org.springframework.security:spring-security-crypto')
 
     compile("io.reactivesw:commons:0.0.2")
+    //message client
+    compile("io.reactivesw:message-client:0.0.1")
 }

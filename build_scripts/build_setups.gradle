@@ -10,6 +10,10 @@ repositories {
     maven {
         url 'https://github.com/reactivesw/commons/raw/master/lib'
     }
+
+    maven {
+        url 'https://github.com/reactivesw/message-client/raw/master/lib'
+    }
 }
 
 apply plugin: 'java'
