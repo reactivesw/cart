@@ -121,8 +121,8 @@ public class SignInConsumer {
   /**
    * merge this cart.
    *
-   * @param customerCart Cart
-   * @param anonymousCart  Cart
+   * @param customerCart  Cart
+   * @param anonymousCart Cart073250a276f421c309e19c71d06067566f79b3c
    */
   private void mergeCart(Cart customerCart, Cart anonymousCart) {
     LOG.trace("Enter. customerCart: {}, anonymousCart: {}.", customerCart, anonymousCart);
