@@ -15,7 +15,7 @@ items:
       spec:
         containers:
         - name: cart
-          image: reactivesw/cart:0.0.4-beta
+          image: reactivesw/cart:0.0.4-dev
           imagePullPolicy: Always
           ports:
           - containerPort: 80

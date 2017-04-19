@@ -1,4 +1,4 @@
 jar {
     baseName = 'cart'
-    version = '0.0.4-beta'
+    version = '0.0.4-dev'
 }
