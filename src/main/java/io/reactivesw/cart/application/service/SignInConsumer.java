@@ -106,7 +106,7 @@ public class SignInConsumer {
     } else {
       Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
       if (anonymousCart == null) {
-        LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
+        LOG.debug("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
             + "{}.", customerId, anonymousId);
 
       } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
