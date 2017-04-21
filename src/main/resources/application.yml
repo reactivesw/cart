@@ -14,14 +14,14 @@ spring:
     driver-class-name: org.postgresql.Driver
   jpa:
     database-platform: io.reactivesw.database.dialect.JSONBPostgreSQLDialect
-    show-sql: true
+    show-sql: false
     hibernate:
       ddl-auto: update
 
 
 product:
   service:
-    uri: http://35.184.19.183/products/
+    uri: http://product/
 customer:
   service:
     uri: http://localhost:8084/
@@ -30,7 +30,7 @@ io:
   reactivesw:
     message:
       broker:
-        host: http://umasuo.com
+        host: http://www.reactivesw.org
       brokerType: google
       google:
         project:
