@@ -48,6 +48,31 @@ public class AddLineItemService implements Updater<Cart, UpdateAction> {
     }
   }
 
+
+  /**
+   * add line item.
+   *
+   * @param cart Cart
+   * @param item LineItem
+   */
+  public void mergeLineItem(Cart cart, LineItem item) {
+    LineItem value = cart.getLineItems().stream().filter(
+        lineItemValue -> lineItemValue.getProductId().equals(item.getProductId())
+            && lineItemValue.getVariantId() == item.getVariantId()
+    ).findAny().orElse(null);
+
+    if (value == null) {
+      LineItem newItem = new LineItem();
+      newItem.setQuantity(item.getQuantity());
+      newItem.setVariantId(item.getVariantId());
+      newItem.setProductId(item.getProductId());
+      cart.getLineItems().add(newItem);
+    } else {
+      //if exist, then just add the quantity
+      value.setQuantity(value.getQuantity() + item.getQuantity());
+    }
+  }
+
   /**
    * get data from action.
    *

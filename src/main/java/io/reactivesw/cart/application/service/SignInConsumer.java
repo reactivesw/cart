@@ -128,7 +128,7 @@ public class SignInConsumer {
     LOG.trace("Enter. customerCart: {}, anonymousCart: {}.", customerCart, anonymousCart);
     List<LineItem> lineItems = anonymousCart.getLineItems();
     lineItems.stream().forEach(
-        lineItem -> addLineItemService.addLineItem(customerCart, lineItem)
+        lineItem -> addLineItemService.mergeLineItem(customerCart, lineItem)
     );
 
     // Save cart after merged.
