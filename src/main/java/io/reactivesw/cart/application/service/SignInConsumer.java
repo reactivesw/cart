@@ -82,7 +82,7 @@ public class SignInConsumer {
     events.stream().forEach(
         message -> {
           SignInEvent event = jsonDeserializer.deserialize(message.getData().toString());
-          mergeCart(event.getCustomerId(), event.getCustomerId());
+          mergeCart(event.getCustomerId(), event.getAnonymousId());
           consumer.acknowledgeMessage(message.getExternalId());//for google we put ach
           LOG.debug("Processed message. messageId: {},  externalId: {}", message.getId(), message
               .getExternalId());
