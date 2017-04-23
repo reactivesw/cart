@@ -84,10 +84,14 @@ public class SignInConsumer {
           SignInEvent event = jsonDeserializer.deserialize(message.getData().toString());
           LOG.info("Process event: {}.", message.getData().toString());
 
-          mergeCart(event.getCustomerId(), event.getAnonymousId());
-          consumer.acknowledgeMessage(message.getExternalId());//for google we put ach
-          LOG.debug("Processed message. messageId: {},  externalId: {}", message.getId(), message
-              .getExternalId());
+          if (event.getAnonymousId() != null) {
+            // Only cart with anonymous id need to be processed.
+            mergeCart(event.getCustomerId(), event.getAnonymousId());
+            consumer.acknowledgeMessage(message.getExternalId());//for google we put ach
+            LOG.debug("Processed message. messageId: {},  externalId: {}", message.getId(), message
+                .getExternalId());
+          }
+
         }
     );
 
