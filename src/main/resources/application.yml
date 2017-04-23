@@ -32,6 +32,11 @@ io:
       broker:
         host: http://www.reactivesw.org
       brokerType: google
+      topic:
+        signin:
+          name: reactivesw-dev-customer-login
+          version: 1
+          subscriber: dev-customer-cart-merge
       google:
         project:
           id: reactivesw-project

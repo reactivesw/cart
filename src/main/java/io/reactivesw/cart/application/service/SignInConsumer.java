@@ -8,7 +8,6 @@ import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.configuration.EventConfig;
 import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import io.reactivesw.cart.infrastructure.repository.CartRepository;
-import io.reactivesw.cart.infrastructure.util.EventSubscriberUtil;
 import io.reactivesw.message.client.consumer.Consumer;
 import io.reactivesw.message.client.core.DefaultConsumerFactory;
 import io.reactivesw.message.client.core.Message;
@@ -65,7 +64,7 @@ public class SignInConsumer {
   @Autowired
   public SignInConsumer(EventConfig eventConfig) {
     consumer = DefaultConsumerFactory.createGoogleConsumer(eventConfig.getGoogleCloudProjectId(),
-        EventSubscriberUtil.SIGN_IN_MERGE_CART);
+        eventConfig.getSigninSubscriber());
     jsonDeserializer = new JsonDeserializer(SignInEvent.class);
   }
 
