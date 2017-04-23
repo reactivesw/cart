@@ -8,7 +8,6 @@ import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.configuration.EventConfig;
 import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import io.reactivesw.cart.infrastructure.repository.CartRepository;
-import io.reactivesw.cart.infrastructure.util.EventSubscriberUtil;
 import io.reactivesw.message.client.consumer.Consumer;
 import io.reactivesw.message.client.core.DefaultConsumerFactory;
 import io.reactivesw.message.client.core.Message;
@@ -65,7 +64,7 @@ public class SignInConsumer {
   @Autowired
   public SignInConsumer(EventConfig eventConfig) {
     consumer = DefaultConsumerFactory.createGoogleConsumer(eventConfig.getGoogleCloudProjectId(),
-        EventSubscriberUtil.SIGN_IN_MERGE_CART);
+        eventConfig.getSigninSubscriber());
     jsonDeserializer = new JsonDeserializer(SignInEvent.class);
   }
 
@@ -82,7 +81,7 @@ public class SignInConsumer {
     events.stream().forEach(
         message -> {
           SignInEvent event = jsonDeserializer.deserialize(message.getData().toString());
-          mergeCart(event.getCustomerId(), event.getCustomerId());
+          mergeCart(event.getCustomerId(), event.getAnonymousId());
           consumer.acknowledgeMessage(message.getExternalId());//for google we put ach
           LOG.debug("Processed message. messageId: {},  externalId: {}", message.getId(), message
               .getExternalId());
@@ -106,8 +105,8 @@ public class SignInConsumer {
     } else {
       Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
       if (anonymousCart == null) {
-        LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
-            + "{}.", customerId, anonymousId);
+        LOG.debug("Merge cart failed: anonymous cart not exist. customerId: {}, anonymousId: {}.",
+            customerId, anonymousId);
 
       } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
         LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
@@ -128,7 +127,7 @@ public class SignInConsumer {
     LOG.trace("Enter. customerCart: {}, anonymousCart: {}.", customerCart, anonymousCart);
     List<LineItem> lineItems = anonymousCart.getLineItems();
     lineItems.stream().forEach(
-        lineItem -> addLineItemService.addLineItem(customerCart, lineItem)
+        lineItem -> addLineItemService.mergeLineItem(customerCart, lineItem)
     );
 
     // Save cart after merged.
