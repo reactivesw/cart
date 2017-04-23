@@ -97,23 +97,19 @@ public class SignInConsumer {
    * @param anonymousId String.
    */
   private void mergeCart(String customerId, String anonymousId) {
+
     Cart customerCart = cartService.getActiveCartByCustomerId(customerId);
 
-    if (anonymousId.equals(customerCart.getAnonymousId())) {
+    Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
+    if (anonymousCart == null) {
+      LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
+          + "{}.", customerId, anonymousId);
+
+    } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
       LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
 
     } else {
-      Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
-      if (anonymousCart == null) {
-        LOG.debug("Merge cart failed: anonymous cart not exist. customerId: {}, anonymousId: {}.",
-            customerId, anonymousId);
-
-      } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
-        LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
-
-      } else {
-        mergeCart(customerCart, anonymousCart);
-      }
+      mergeCart(customerCart, anonymousCart);
     }
   }
 
