@@ -4,6 +4,7 @@ import io.reactivesw.model.LocalizedString;
 import io.reactivesw.model.Money;
 import lombok.Data;
 
+import java.time.ZonedDateTime;
 import java.util.List;
 
 /**
@@ -16,6 +17,11 @@ public class LineItemView {
    * id.
    */
   private String id;
+
+  /**
+   * Create at.
+   */
+  private ZonedDateTime createdAt;
 
   /**
    * product id.

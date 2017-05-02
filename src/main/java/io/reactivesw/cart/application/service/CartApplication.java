@@ -8,6 +8,7 @@ import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.cart.infrastructure.util.CreateTimeComparator;
 import io.reactivesw.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -45,6 +47,11 @@ public class CartApplication {
    */
   @Autowired
   private transient LineItemApplication lineItemService;
+
+  /**
+   * LineItem comparator.
+   */
+  private transient CreateTimeComparator createTimeComparator = new CreateTimeComparator();
 
   /**
    * update cart for with action list.
@@ -116,7 +123,7 @@ public class CartApplication {
    * @param lineItems list of LineItemValue
    */
   private void fillLineItem(CartView cartView, List<LineItem> lineItems) {
-    LOG.debug("enter: cart: {}, lineItems: {}", cartView, lineItems);
+    LOG.debug("Enter. cart: {}, lineItems: {}.", cartView, lineItems);
 
     if (lineItems != null) {
       List<LineItemView> items = new ArrayList<>();
@@ -130,6 +137,7 @@ public class CartApplication {
               //todo if the product not exit anymore, the auto delete the product?
               LineItemView itemView = new LineItemView();
               itemView.setId(lineItem.getId());
+              itemView.setCreatedAt(lineItem.getCreatedAt());
               itemView.setQuantity(lineItem.getQuantity());
               itemView.setProductId(lineItem.getProductId());
               itemView.setVariantId(lineItem.getVariantId());
@@ -141,7 +149,10 @@ public class CartApplication {
             }
           }
       );
-      LOG.debug("exit: cart: {}", cartView);
+
+      // sort the line item with create time.
+      Collections.sort(items, createTimeComparator);
+      LOG.debug("Exit. cart: {}.", cartView);
       cartView.setLineItems(items);
     }
   }
