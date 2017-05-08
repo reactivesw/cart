@@ -8,7 +8,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  * Micro service entrance.
  */
 @SpringBootApplication(scanBasePackages = "io.reactivesw")
-//@EnableScheduling
+@EnableScheduling
 public class Application {
 
   public static void main(String[] args) {
