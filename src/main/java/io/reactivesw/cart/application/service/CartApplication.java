@@ -8,7 +8,6 @@ import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
-import io.reactivesw.cart.infrastructure.util.CreateTimeComparator;
 import io.reactivesw.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +49,7 @@ public class CartApplication {
   /**
    * LineItem comparator.
    */
-  private transient CreateTimeComparator createTimeComparator = new CreateTimeComparator();
+  //  private transient CreateTimeComparator createTimeComparator = new CreateTimeComparator();
 
   /**
    * update cart for with action list.
@@ -150,7 +149,7 @@ public class CartApplication {
       );
 
       // sort the line item with create time.
-//      Collections.sort(items, createTimeComparator);
+      // Collections.sort(items, createTimeComparator);
       LOG.debug("Exit. cart: {}.", cartView);
       cartView.setLineItems(items);
     }
