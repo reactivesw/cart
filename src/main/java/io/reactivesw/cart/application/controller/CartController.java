@@ -44,7 +44,7 @@ public class CartController {
   /**
    * constructor.
    *
-   * @param cartService CartService
+   * @param cartService     CartService
    * @param cartApplication CartApplication
    */
   @Autowired
@@ -56,22 +56,25 @@ public class CartController {
   /**
    * get cart by id.
    *
-   * @param cartId the id
+   * @param cartId      the id
+   * @param anonymousId String
    * @return the cart by id
    */
   @GetMapping(Router.CART_WITH_ID)
-  public CartView getCartById(@PathVariable(Router.CART_ID) String cartId) {
-    LOG.info("Enter, id: {}", cartId);
+  public CartView getCartById(@PathVariable(Router.CART_ID) String cartId,
+                              @RequestParam(required = false) String anonymousId) {
+    LOG.info("Enter, id: {}, anonymousId: {}.", cartId, anonymousId);
 
-    Cart entity = cartService.getById(cartId);
+    CartView cartView = cartApplication.getCartById(cartId, anonymousId);
 
-    LOG.info("Exit entity: {}", entity);
-    return cartApplication.getFullCart(entity);
+    LOG.info("Exit. cartView: {}.", cartView);
+    return cartView;
   }
 
   /**
    * get cart by id.
    * TODO add version here.
+   *
    * @param cartId the id
    * @return the cart by id
    */
@@ -92,13 +95,14 @@ public class CartController {
    * @return the cart by customer id
    */
   @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
-  public CartView getActiveCartByCustomerId(@RequestParam @NotNull String customerId) {
-    LOG.info("customerId : {}", customerId);
+  public CartView getActiveCartByCustomerId(@RequestParam @NotNull String customerId,
+                                            @RequestParam(required = false) String anonymousId) {
+    LOG.info("Enter. customerId: {}, anonymousId: {}.", customerId);
 
-    Cart entity = cartService.getActiveCartByCustomerId(customerId);
+    CartView cartView = cartApplication.getCartByCustomerId(customerId, anonymousId);
 
-    LOG.info("entity : {}", entity);
-    return cartApplication.getFullCart(entity);
+    LOG.info("Exit. cartView: {}.", cartView);
+    return cartView;
   }
 
   /**
@@ -109,7 +113,7 @@ public class CartController {
    */
   @GetMapping(value = Router.CARTS_ROOT, params = "anonymousId")
   public CartView getCartByAnonymousId(@RequestParam String anonymousId) {
-    LOG.info("anonymousId:{}", anonymousId);
+    LOG.info("anonymousId: {}", anonymousId);
 
     Cart entity = cartService.getCartByAnonymousId(anonymousId);
 

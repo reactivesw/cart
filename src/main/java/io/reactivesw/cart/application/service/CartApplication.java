@@ -49,6 +49,12 @@ public class CartApplication {
   private transient LineItemApplication lineItemService;
 
   /**
+   * Cart merger.
+   */
+  @Autowired
+  private transient CartMerger cartMerger;
+
+  /**
    * LineItem comparator.
    */
   private transient CreateTimeComparator createTimeComparator = new CreateTimeComparator();
@@ -71,18 +77,55 @@ public class CartApplication {
   }
 
   /**
-   * get cart by cart id.
+   * Get cart by cart id, and if there is an anonymous id, then try to merge the anonymous cart
+   * to customer's cart.
    *
    * @param id cart id
    * @return CartView
    */
-  public CartView getCartById(String id) {
+  public CartView getCartById(String id, String anonymousId) {
+    LOG.debug("Enter. id: {}, anonymousId: {}.", id, anonymousId);
     Cart entity = cartService.getById(id);
+
+    if (anonymousId != null) {
+      Cart anonymousCart = cartService.getCartByAnonymousId(anonymousId);
+
+      if (anonymousCart != null
+          && anonymousCart.getLineItems() != null
+          && !anonymousCart.getLineItems().isEmpty()) {
+        cartMerger.mergeCart(entity, anonymousCart);
+      }
+    }
+    LOG.debug("Exit. cart: {}.", entity);
     return getFullCart(entity);
   }
 
   /**
-   * get an cart with all the detail info.
+   * Get cart by customer id and anonymousId, if anonymous cart exist, then merge it to customer
+   * cart.
+   *
+   * @param customerId  String
+   * @param anonymousId String
+   * @return CartView
+   */
+  public CartView getCartByCustomerId(String customerId, String anonymousId) {
+    LOG.debug("Enter. customerId: {}, anonymousId: {}.", customerId, anonymousId);
+    Cart customerCart = cartService.getActiveCartByCustomerId(customerId);
+
+    if (anonymousId != null) {
+      Cart anonymousCart = cartService.getCartByAnonymousId(anonymousId);
+      if (anonymousCart != null
+          && anonymousCart.getLineItems() != null
+          && !anonymousCart.getLineItems().isEmpty()) {
+        cartMerger.mergeCart(customerCart, anonymousCart);
+      }
+    }
+    LOG.debug("Exit. cart: {}.", customerCart);
+    return getFullCart(customerCart);
+  }
+
+  /**
+   * Get an cart with all the detail info.
    *
    * @param cart CartEntity
    * @return CartView

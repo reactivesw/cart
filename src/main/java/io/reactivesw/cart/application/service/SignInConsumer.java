@@ -1,13 +1,7 @@
 package io.reactivesw.cart.application.service;
 
 import io.reactivesw.cart.application.model.event.SignInEvent;
-import io.reactivesw.cart.application.service.update.AddLineItemService;
-import io.reactivesw.cart.domain.model.Cart;
-import io.reactivesw.cart.domain.model.LineItem;
-import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.configuration.EventConfig;
-import io.reactivesw.cart.infrastructure.enums.CartStatus;
-import io.reactivesw.cart.infrastructure.repository.CartRepository;
 import io.reactivesw.message.client.consumer.Consumer;
 import io.reactivesw.message.client.core.DefaultConsumerFactory;
 import io.reactivesw.message.client.core.Message;
@@ -36,22 +30,10 @@ public class SignInConsumer {
   private transient Consumer consumer;
 
   /**
-   * add line item service.
+   * Cart Merger.
    */
   @Autowired
-  private transient AddLineItemService addLineItemService;
-
-  /**
-   * cart service.
-   */
-  @Autowired
-  private transient CartService cartService;
-
-  /**
-   * cart repository.
-   */
-  @Autowired
-  private transient CartRepository cartRepository;
+  private transient CartMerger cartMerger;
 
   /**
    * json deserializer.
@@ -86,7 +68,7 @@ public class SignInConsumer {
 
           if (event.getAnonymousId() != null) {
             // Only cart with anonymous id need to be processed.
-            mergeCart(event.getCustomerId(), event.getAnonymousId());
+            cartMerger.mergeCart(event.getCustomerId(), event.getAnonymousId());
             consumer.acknowledgeMessage(message.getExternalId());//for google we put ach
             LOG.debug("Processed message. messageId: {},  externalId: {}", message.getId(), message
                 .getExternalId());
@@ -97,48 +79,5 @@ public class SignInConsumer {
 
   }
 
-  /**
-   * merge cart.
-   *
-   * @param customerId  String
-   * @param anonymousId String.
-   */
-  private void mergeCart(String customerId, String anonymousId) {
-
-    Cart customerCart = cartService.getActiveCartByCustomerId(customerId);
-
-    Cart anonymousCart = cartRepository.findOneByAnonymousId(anonymousId);
-    if (anonymousCart == null) {
-      LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
-          + "{}.", customerId, anonymousId);
-
-    } else if (anonymousCart.getCartStatus().equals(CartStatus.Merged)) {
-      LOG.debug("Cart already merged. customerId: {}. anonymousId: {}.", customerId, anonymousId);
-
-    } else {
-      mergeCart(customerCart, anonymousCart);
-    }
-  }
-
-  /**
-   * merge this cart.
-   *
-   * @param customerCart  Cart
-   * @param anonymousCart Cart
-   */
-  private void mergeCart(Cart customerCart, Cart anonymousCart) {
-    LOG.trace("Enter. customerCart: {}, anonymousCart: {}.", customerCart, anonymousCart);
-    List<LineItem> lineItems = anonymousCart.getLineItems();
-    lineItems.stream().forEach(
-        lineItem -> addLineItemService.mergeLineItem(customerCart, lineItem)
-    );
-
-    // Save cart after merged.
-    Cart mergedCart = cartRepository.save(customerCart);
-    //update anonymous cart's status.
-    anonymousCart.setCartStatus(CartStatus.Merged);
-    cartRepository.save(anonymousCart);
-    LOG.trace("Exit. mergedCart: {}.", mergedCart);
-  }
 
 }

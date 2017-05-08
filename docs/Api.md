@@ -37,12 +37,12 @@ Cart service.
 ### 3 Api
 #### 3.1 get cart by cartId
 - Path: /{cartId}
-- Payload: cartId -- NotNull
+- Payload: cartId -- NotNull, anonymousId -- NULLABLE
 - Response: CartView
 
 #### 3.2 get cart by customerId
 - Path: /
-- Payload: customerId -- NotNull
+- Payload: customerId -- NotNull, anonymousId -- NULLABLE
 - Response: CartView
 - Sample: {RootUrl}?customerId=ERTAYDASD-ADAVFCA-SADSDASDA-SCAS
 
