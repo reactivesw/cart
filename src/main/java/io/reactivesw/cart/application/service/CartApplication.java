@@ -127,7 +127,7 @@ public class CartApplication {
 
     if (lineItems != null) {
       List<LineItemView> items = new ArrayList<>();
-      lineItems.parallelStream().forEach(
+      lineItems.stream().forEach(
           lineItem -> {
 
             ProductView product = restClient.getProduct(lineItem.getProductId(), lineItem
