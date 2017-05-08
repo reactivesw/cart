@@ -49,7 +49,7 @@ public class CartMerger {
     Cart anonymousCart = cartService.getCartByAnonymousId(anonymousId);
     if (anonymousCart == null
         || anonymousCart.getLineItems() != null
-        || anonymousCart.getLineItems().size() > 0) {
+        || anonymousCart.getLineItems().isEmpty()) {
       LOG.error("Merge cart failed for anonymous cart not exist. customerId: {}, anonymousId: "
           + "{}.", customerId, anonymousId);
 
