@@ -97,11 +97,11 @@ public class CartController {
   @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
   public CartView getActiveCartByCustomerId(@RequestParam @NotNull String customerId,
                                             @RequestParam(required = false) String anonymousId) {
-    LOG.info("Enter. customerId : {}, anonymousId: {}.", customerId);
+    LOG.info("Enter. customerId: {}, anonymousId: {}.", customerId);
 
     CartView cartView = cartApplication.getCartByCustomerId(customerId, anonymousId);
 
-    LOG.info("Exit. cartView : {}", cartView);
+    LOG.info("Exit. cartView: {}.", cartView);
     return cartView;
   }
 
@@ -113,7 +113,7 @@ public class CartController {
    */
   @GetMapping(value = Router.CARTS_ROOT, params = "anonymousId")
   public CartView getCartByAnonymousId(@RequestParam String anonymousId) {
-    LOG.info("anonymousId:{}", anonymousId);
+    LOG.info("anonymousId: {}", anonymousId);
 
     Cart entity = cartService.getCartByAnonymousId(anonymousId);
 

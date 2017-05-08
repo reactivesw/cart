@@ -77,7 +77,7 @@ public class CartApplication {
   }
 
   /**
-   * get cart by cart id, and if there is an anonymous id, then try to merge the anonymous cart
+   * Get cart by cart id, and if there is an anonymous id, then try to merge the anonymous cart
    * to customer's cart.
    *
    * @param id cart id
@@ -92,13 +92,13 @@ public class CartApplication {
 
       if (anonymousCart != null
           && anonymousCart.getLineItems() != null
-          && anonymousCart.getLineItems().size() > 0) {
+          && !anonymousCart.getLineItems().isEmpty()) {
         cartMerger.mergeCart(entity, anonymousCart);
       } else {
         LOG.debug("Anonymous cart not exist. anonymousId: {}", anonymousId);
       }
     }
-    LOG.debug("Exit. cart: {}", entity);
+    LOG.debug("Exit. cart: {}.", entity);
     return getFullCart(entity);
   }
 
@@ -118,18 +118,18 @@ public class CartApplication {
       Cart anonymousCart = cartService.getCartByAnonymousId(anonymousId);
       if (anonymousCart != null
           && anonymousCart.getLineItems() != null
-          && anonymousCart.getLineItems().size() > 0) {
+          && !anonymousCart.getLineItems().isEmpty()) {
         cartMerger.mergeCart(customerCart, anonymousCart);
       } else {
-        LOG.debug("Anonymous cart not exist. anonymousId: {}", anonymousId);
+        LOG.debug("Anonymous cart not exist. anonymousId: {}.", anonymousId);
       }
     }
-    LOG.debug("Exit. cart: {}", customerCart);
+    LOG.debug("Exit. cart: {}.", customerCart);
     return getFullCart(customerCart);
   }
 
   /**
-   * get an cart with all the detail info.
+   * Get an cart with all the detail info.
    *
    * @param cart CartEntity
    * @return CartView
