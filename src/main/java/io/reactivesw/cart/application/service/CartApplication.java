@@ -94,8 +94,6 @@ public class CartApplication {
           && anonymousCart.getLineItems() != null
           && !anonymousCart.getLineItems().isEmpty()) {
         cartMerger.mergeCart(entity, anonymousCart);
-      } else {
-        LOG.debug("Anonymous cart not exist. anonymousId: {}", anonymousId);
       }
     }
     LOG.debug("Exit. cart: {}.", entity);
@@ -120,8 +118,6 @@ public class CartApplication {
           && anonymousCart.getLineItems() != null
           && !anonymousCart.getLineItems().isEmpty()) {
         cartMerger.mergeCart(customerCart, anonymousCart);
-      } else {
-        LOG.debug("Anonymous cart not exist. anonymousId: {}.", anonymousId);
       }
     }
     LOG.debug("Exit. cart: {}.", customerCart);
