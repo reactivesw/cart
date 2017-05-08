@@ -139,7 +139,7 @@ public class CartService {
 
     List<Cart> result = this.cartRepository.findByCustomerIdAndCartStatus(customerId,
         CartStatus.Active);
-    Cart cart = result.parallelStream().findAny().orElse(null);
+    Cart cart = result.stream().findAny().orElse(null);
 
     if (cart == null) {
       cart = this.createActiveCartWithCustomerId(customerId);

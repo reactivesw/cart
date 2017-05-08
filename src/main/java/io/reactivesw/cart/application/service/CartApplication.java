@@ -90,7 +90,7 @@ public class CartApplication {
 
     CartView data = fillData(cart);
 
-    calculateCartPrice(data);
+    //    calculateCartPrice(data);
 
     LOG.debug("exit cart: {}", data);
     return data;
@@ -107,7 +107,7 @@ public class CartApplication {
     CartView cartView = CartMapper.entityToModel(cart);
 
     // fill the LineItem info
-    fillLineItem(cartView, cart.getLineItems());
+    //    fillLineItem(cartView, cart.getLineItems());
 
     LOG.debug("end fillData, exit: cart: {}", cartView);
     return cartView;
