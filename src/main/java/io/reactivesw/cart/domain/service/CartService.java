@@ -49,8 +49,8 @@ public class CartService {
    * Each customer(include anonymous customer) can only have one active cart.
    * If the customer already has an cart, then throw exception.
    *
-   * @param cart CartEntity
-   * @return CartEntity
+   * @param cart Cart
+   * @return Cart
    */
   public Cart createActiveCart(Cart cart) {
     String customerId = cart.getCustomerId();
@@ -75,6 +75,23 @@ public class CartService {
 
     //TODO recalculate the cart
     return cartRepository.save(cart);
+  }
+
+  /**
+   * Save cart.
+   *
+   * @param cart Cart
+   * @return Saved Cart
+   */
+  public Cart saveCart(Cart cart) {
+    LOG.debug("Enter. cart: {}.", cart);
+    Cart result = null;
+    if (cart != null) {
+      result = cartRepository.save(cart);
+    }
+
+    LOG.debug("Exit. cart: {}.", result);
+    return result;
   }
 
   /**
