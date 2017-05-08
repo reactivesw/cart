@@ -110,6 +110,13 @@ public class CartService {
       LOG.debug("Only active cart can be ordered, id: {}", cartId);
       throw new ImmutableException("Only active Cart can be ordered");
     }
+
+
+    if (cart.getLineItems() == null || cart.getLineItems().size() <= 0) {
+      LOG.debug("Empty cart can not be ordered, id: {}", cartId);
+      throw new ImmutableException("Empty cart can not be ordered");
+    }
+
     cart.setCartStatus(CartStatus.Ordered);
     this.cartRepository.save(cart);
     return cart;
