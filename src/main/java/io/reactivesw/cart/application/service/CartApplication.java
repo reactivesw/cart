@@ -8,6 +8,7 @@ import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.service.CartService;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
+import io.reactivesw.cart.infrastructure.util.CreateTimeComparator;
 import io.reactivesw.model.Money;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -49,7 +51,7 @@ public class CartApplication {
   /**
    * LineItem comparator.
    */
-  //  private transient CreateTimeComparator createTimeComparator = new CreateTimeComparator();
+  private transient CreateTimeComparator createTimeComparator = new CreateTimeComparator();
 
   /**
    * update cart for with action list.
@@ -90,7 +92,7 @@ public class CartApplication {
 
     CartView data = fillData(cart);
 
-    //    calculateCartPrice(data);
+    calculateCartPrice(data);
 
     LOG.debug("exit cart: {}", data);
     return data;
@@ -107,7 +109,7 @@ public class CartApplication {
     CartView cartView = CartMapper.entityToModel(cart);
 
     // fill the LineItem info
-    //    fillLineItem(cartView, cart.getLineItems());
+    fillLineItem(cartView, cart.getLineItems());
 
     LOG.debug("end fillData, exit: cart: {}", cartView);
     return cartView;
@@ -149,7 +151,7 @@ public class CartApplication {
       );
 
       // sort the line item with create time.
-      // Collections.sort(items, createTimeComparator);
+//      Collections.sort(items, createTimeComparator);
       LOG.debug("Exit. cart: {}.", cartView);
       cartView.setLineItems(items);
     }
