@@ -151,7 +151,7 @@ public class CartApplication {
       );
 
       // sort the line item with create time.
-      Collections.sort(items, createTimeComparator);
+//      Collections.sort(items, createTimeComparator);
       LOG.debug("Exit. cart: {}.", cartView);
       cartView.setLineItems(items);
     }
