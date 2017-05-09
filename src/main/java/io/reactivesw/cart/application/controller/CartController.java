@@ -94,7 +94,7 @@ public class CartController {
    * @param customerId the customer id
    * @return the cart by customer id
    */
-  @GetMapping(value = Router.CARTS_ROOT, params = "customerId")
+  @GetMapping(value = Router.CARTS_ROOT, params = {"customerId", "anonymousId"})
   public CartView getActiveCartByCustomerId(@RequestParam @NotNull String customerId,
                                             @RequestParam(required = false) String anonymousId) {
     LOG.info("Enter. customerId: {}, anonymousId: {}.", customerId);
