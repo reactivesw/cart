@@ -7,6 +7,7 @@ import io.reactivesw.cart.application.model.mapper.CartMapper;
 import io.reactivesw.cart.domain.model.Cart;
 import io.reactivesw.cart.domain.model.LineItem;
 import io.reactivesw.cart.domain.service.CartService;
+import io.reactivesw.cart.infrastructure.enums.CartStatus;
 import io.reactivesw.cart.infrastructure.update.UpdateAction;
 import io.reactivesw.cart.infrastructure.util.CreateTimeComparator;
 import io.reactivesw.model.Money;
@@ -92,7 +93,8 @@ public class CartApplication {
 
       if (anonymousCart != null
           && anonymousCart.getLineItems() != null
-          && !anonymousCart.getLineItems().isEmpty()) {
+          && !anonymousCart.getLineItems().isEmpty()
+          && anonymousCart.getCartStatus().equals(CartStatus.Active)) {
         cartMerger.mergeCart(entity, anonymousCart);
       }
     }
