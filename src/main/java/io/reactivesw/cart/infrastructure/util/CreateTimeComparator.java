@@ -20,6 +20,10 @@ public class CreateTimeComparator implements Comparator<LineItemView>, Serializa
    */
   @Override
   public int compare(LineItemView o1, LineItemView o2) {
-    return o1.getCreatedAt().compareTo(o2.getCreatedAt());
+    int result = 0;
+    if (o1.getCreatedAt() != null && o2.getCreatedAt() != null) {
+      result = o1.getCreatedAt().compareTo(o2.getCreatedAt());
+    }
+    return result;
   }
 }
