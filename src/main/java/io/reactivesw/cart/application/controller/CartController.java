@@ -63,7 +63,7 @@ public class CartController {
   @GetMapping(Router.CART_WITH_ID)
   public CartView getCartById(@PathVariable(Router.CART_ID) String cartId,
                               @RequestParam(required = false) String anonymousId) {
-    LOG.info("Enter, id: {}, anonymousId: {}.", cartId, anonymousId);
+    LOG.info("Enter. id: {}, anonymousId: {}.", cartId, anonymousId);
 
     CartView cartView = cartApplication.getCartById(cartId, anonymousId);
 
@@ -107,14 +107,14 @@ public class CartController {
   /**
    * get cart by customer id and anonymous id.
    *
-   * @param customerId the customer id
+   * @param customerId  the customer id
    * @param anonymousId the anonymous id
    * @return the cart by customer id
    */
   @GetMapping(value = Router.CARTS_ROOT, params = {"customerId", "anonymousId"})
   public CartView getActiveCartByCustomerId(@RequestParam @NotNull String customerId,
                                             @RequestParam(required = false) String anonymousId) {
-    LOG.info("Enter. customerId: {}, anonymousId: {}.", customerId);
+    LOG.info("Enter. customerId: {}, anonymousId: {}.", customerId, anonymousId);
 
     CartView cartView = cartApplication.getCartByCustomerId(customerId, anonymousId);
 

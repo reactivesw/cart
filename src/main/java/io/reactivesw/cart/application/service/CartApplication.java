@@ -118,7 +118,8 @@ public class CartApplication {
       Cart anonymousCart = cartService.getCartByAnonymousId(anonymousId);
       if (anonymousCart != null
           && anonymousCart.getLineItems() != null
-          && !anonymousCart.getLineItems().isEmpty()) {
+          && !anonymousCart.getLineItems().isEmpty()
+          && anonymousCart.getCartStatus().equals(CartStatus.Active)) {
         cartMerger.mergeCart(customerCart, anonymousCart);
       }
     }
